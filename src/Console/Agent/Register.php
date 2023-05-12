@@ -5,6 +5,7 @@ namespace App\Console\Agent;
 use App\Console\BaseCommand;
 use App\SpaceTraders\ApiService;
 use App\SpaceTraders\Enum\FactionName;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -46,6 +47,7 @@ class Register extends BaseCommand
 
     /**
      * @inheritDoc
+     * @throws GuzzleException
      */
     protected function perform(): int
     {
