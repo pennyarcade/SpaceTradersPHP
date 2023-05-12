@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+use App\Console\Agent\Register;
+use App\Utility\PsrCompatibleContainer;
+use Symfony\Component\Console\Application;
+
+// Activate console logging
+$logToConsole = true;
+
+/** @var PsrCompatibleContainer $container */
+$container = require_once __DIR__ . '/../app/bootstrap.php';
+
+$application = new Application();
+$application->add(new Register($container));
+
+$application->run();

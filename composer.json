@@ -1,0 +1,62 @@
+{
+  "name": "chocokiko/space-traders",
+  "description": "A Slim Framework skeleton application for rapid development",
+  "keywords": [
+    "console",
+    "game",
+    "space traders"
+  ],
+  "homepage": "https://paste.repository.here",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chocokiko",
+      "email": "chocokiko@gmx.de",
+      "homepage": "https://paste.homepage.here"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "doctrine/dbal": "^3.6",
+    "doctrine/orm": "^2.15",
+    "guzzlehttp/guzzle": "^7.5",
+    "monolog/monolog": "^3.3.1",
+    "pbergman/tree-helper": "^1.0.2",
+    "phpunit/phpunit": "^10.1.2",
+    "pimple/pimple": "~3.5",
+    "symfony/cache": "^6.2",
+    "symfony/console": "^6.2.10",
+    "symfony/yaml": "^6.2.10"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.16",
+    "jangregor/phpstan-prophecy": "^1.0",
+    "mockery/mockery": "^1.4.4",
+    "phpmd/phpmd": "^2.11",
+    "phpstan/extension-installer": "^1.1",
+    "phpstan/phpstan": "^1.4",
+    "phpstan/phpstan-mockery": "^1.0",
+    "sebastian/version": "^4.0.1",
+    "squizlabs/php_codesniffer": "*"
+  },
+  "config": {
+    "process-timeout": 0,
+    "sort-packages": true,
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit --colors=always --configuration ./tests/phpunit.xml"
+  }
+}

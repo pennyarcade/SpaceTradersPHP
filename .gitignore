@@ -1,0 +1,4 @@
+vendor/
+var/log/*.log
+.php-cs-fixer.cache
+.idea/sonarlint/
