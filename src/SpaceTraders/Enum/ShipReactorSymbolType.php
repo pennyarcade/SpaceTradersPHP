@@ -5,7 +5,7 @@ namespace App\SpaceTraders\Enum;
 
 use App\Common\Trait\Enum;
 
-enum ReactorSymbolType: string
+enum ShipReactorSymbolType: string
 {
     use Enum;
 

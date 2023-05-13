@@ -3,12 +3,12 @@
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
-use App\SpaceTraders\Enum\ReactorSymbolType;
+use App\SpaceTraders\Enum\ShipReactorSymbolType;
 use JsonSerializable;
 
 class ShipReactor implements JsonSerializable, Deserializable
 {
-    protected ReactorSymbolType $symbol;
+    protected ShipReactorSymbolType $symbol;
     protected string            $name;
     protected string            $description;
     protected int               $condition;
@@ -16,7 +16,7 @@ class ShipReactor implements JsonSerializable, Deserializable
     protected ShipRequirements  $requirements;
 
     /**
-     * @param ReactorSymbolType $symbol
+     * @param ShipReactorSymbolType $symbol
      * @param string $name
      * @param string $description
      * @param int $condition
@@ -24,12 +24,12 @@ class ShipReactor implements JsonSerializable, Deserializable
      * @param ShipRequirements $requirements
      */
     public function __construct(
-        ReactorSymbolType $symbol,
-        string $name,
-        string $description,
-        int $condition,
-        int $powerOutput,
-        ShipRequirements $requirements
+        ShipReactorSymbolType $symbol,
+        string                $name,
+        string                $description,
+        int                   $condition,
+        int                   $powerOutput,
+        ShipRequirements      $requirements
     ) {
         $this->symbol = $symbol;
         $this->name = $name;
@@ -40,18 +40,18 @@ class ShipReactor implements JsonSerializable, Deserializable
     }
 
     /**
-     * @return ReactorSymbolType
+     * @return ShipReactorSymbolType
      */
-    public function getSymbol(): ReactorSymbolType
+    public function getSymbol(): ShipReactorSymbolType
     {
         return $this->symbol;
     }
 
     /**
-     * @param ReactorSymbolType $symbol
+     * @param ShipReactorSymbolType $symbol
      * @return ShipReactor
      */
-    public function setSymbol(ReactorSymbolType $symbol): ShipReactor
+    public function setSymbol(ShipReactorSymbolType $symbol): ShipReactor
     {
         $this->symbol = $symbol;
         return $this;
