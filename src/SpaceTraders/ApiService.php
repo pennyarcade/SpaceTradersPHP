@@ -43,10 +43,6 @@ class ApiService
         );
 
         $this->options = ['headers' => $this->config['headers']];
-        $this->options['headers']['Authorization'] = sprintf(
-            $this->options['headers']['Authorization'],
-            $this->config['token']
-        );
     }
 
     /**
@@ -66,6 +62,162 @@ class ApiService
     }
 
     /**
+     * @param int|null $page
+     * @param int|null $limit
+     * @return array|array[]
+     */
+    private function buildPaginationParameters(?int $page = null, ?int $limit = null): array
+    {
+        if (empty($page) && empty($limit)) {
+            return [];
+        }
+
+        // handle pagination
+        $params = ['query' => []];
+        if (is_int($page)) {
+            $params['query']['page'] = $page;
+        }
+        if (is_int($limit)) {
+            $params['query']['limit'] = $limit;
+        }
+        return $params;
+    }
+
+    /**
+     * @param string|null $token
+     * @return array|array[]
+     */
+    private function buildAuthorizationHeader(?string $token = null): array
+    {
+        // handle token
+        if (!empty($token)) {
+            return [
+                'header' => [
+                    'Authorization' => sprintf($this->config['authHeader'], $this->config['token'])
+                ]
+            ];
+        }
+        return [];
+    }
+
+    /**
+     * @param array $data
+     * @return array|array[]
+     */
+    private function buildJsonBody(array $data = []): array
+    {
+        // handle token
+        if (!empty($data)) {
+            return [
+                'json' => $data
+            ];
+        }
+        return [];
+    }
+
+    /**
+     * @param string|array $endpoint
+     * @param int|null $page
+     * @param int|null $limit
+     * @param string|null $token
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    private function paginatedGetRequest(
+        string|array $endpoint = '',
+        ?int    $page = null,
+        ?int    $limit = null,
+        ?string $token = null
+    ): ResponseInterface {
+        $this->logger->debug(
+            "GET {$endpoint}",
+            [
+                'endpoint' => $endpoint,
+                'page'     => $page,
+                'limit'    => $limit,
+                'usingToken' => !(empty($token)) ? 'yes' : 'no' // don't log sensitive user data ^^
+            ]
+        );
+
+        $response = $this->client->get(
+            $this->config['url'] . ((empty($endpoint)) ? '/' . $endpoint : ''),
+            array_merge_recursive(
+                $this->options,
+                $this->buildPaginationParameters($page, $limit),
+                $this->buildAuthorizationHeader($token)
+            )
+        );
+        $this->logger->debug(
+            "GET {endpoint} response: {statusCode}",
+            [
+                'endpoint' => $endpoint,
+                'content' => $response->getBody()->getContents(),
+                'headers' => $response->getHeaders(),
+                'statusCode' => $response->getStatusCode()
+            ]
+        );
+        return $response;
+    }
+
+    /**
+     * @param string|array $endpoint
+     * @param array $jsonData
+     * @param string|null $token
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    private function postRequest(
+        string|array $endpoint = '',
+        array $jsonData = [],
+        ?string $token = null,
+    ): ResponseInterface {
+        $this->logger->debug(
+            "GET {$endpoint}",
+            [
+                'endpoint'   => $endpoint,
+                'jsonData'   => $jsonData,
+                'usingToken' => !(empty($token)) ? 'yes' : 'no' // don't log sensitive user data ^^
+            ]
+        );
+
+        $response = $this->client->post(
+            $this->config['url'] . ((empty($endpoint)) ? '/' . $endpoint : ''),
+            array_merge_recursive(
+                $this->options,
+                $this->buildJsonBody($jsonData),
+                $this->buildAuthorizationHeader($token)
+            )
+        );
+        $this->logger->debug(
+            "GET {endpoint} response: {statusCode}",
+            [
+                'endpoint' => $endpoint,
+                'content' => $response->getBody()->getContents(),
+                'headers' => $response->getHeaders(),
+                'statusCode' => $response->getStatusCode()
+            ]
+        );
+        return $response;
+    }
+
+    /**
+     * @description Creates a new agent and ties it to a temporary Account.
+     *              The agent symbol is a 3-14 character string that will represent your agent. This symbol will
+     *              prefix the symbol of every ship you own. Agent symbols will be cast to all uppercase characters.
+     *              A new agent will be granted an authorization token, a contract with their starting faction,
+     *              a command ship with a jump drive, and one hundred thousand credits.
+     *              > #### Keep your token safe and secure
+     *              >
+     *              > Save your token during the alpha phase. There is no way to regenerate this token without starting
+     *                a new agent. In the future you will be able to generate and manage your tokens from the
+     *                SpaceTraders website.
+     *              You can accept your contract using the `/my/contracts/{contractId}/accept` endpoint. You will
+     *              want to navigate your command ship to a nearby asteroid field and execute the
+     *              `/my/ships/{shipSymbol}/extract` endpoint to mine various types of ores and minerals.
+     *              Return to the contract destination and execute the `/my/ships/{shipSymbol}/deliver`
+     *              endpoint to deposit goods into the contract.
+     *              When your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill`
+     *              to retrieve payment.
      * @param FactionName $faction
      * @param string $symbol
      * @return ResponseInterface
@@ -94,298 +246,282 @@ class ApiService
     }
 
     /**
-     * @param int $page
-     * @param int $limit
+     * @description Return a list of all systems.
+     * @param string $token
+     * @param int|null $page
+     * @param int|null $limit
      * @return ResponseInterface
      * @throws GuzzleException
-     * Todo: make pagination optional
      */
-    public function getSystemList(int $page, int $limit): ResponseInterface
+    public function getSystemList(string $token, ?int $page = null, ?int $limit = null): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting system list",
-        );
-        $response = $this->client->get(
-            $this->config['url'] . '/systems?page=' . $page . '&limit=' . $limit,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Ship list response", [$response->getBody()->getContents()]);
-        return $response;
+        return $this->paginatedGetRequest('systems', $page, $limit, $token);
     }
 
     /**
+     * @description Get the details of a system.
      * @param string $systemSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getSystem(string $systemSymbol): ResponseInterface
+    public function getSystem(string $systemSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting system details",
+        return $this->paginatedGetRequest(
+            [
+                'systems/{systemSymbol}',
+                [
+                    'systemSymbol' => $systemSymbol
+                ]
+            ],
+            null,
+            null,
+            $token
         );
-        $response = $this->client->get(
-            $this->config['url'] . '/systems/'. $systemSymbol,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get system response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Fetch all the waypoints for a given system. System must be charted or a ship must be
+     *              present to return waypoint details.
      * @param string $systemSymbol
-     * @param int $page
-     * @param int $limit
-     * @return ResponseInterface
-     * @throws GuzzleException
-     * Todo: make pagination optional
-     */
-    public function getSystemWaypointList(string $systemSymbol, int $page, int $limit): ResponseInterface
-    {
-        $this->logger->debug(
-            "Getting system waypoint list",
-        );
-        $response = $this->client->get(
-            $this->config['url'] . '/systems/'. $systemSymbol . '/waypoints?page=' . $page . '&limit=' . $limit,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get system waypoint list response", [$response->getBody()->getContents()]);
-        return $response;
-    }
-
-    /**
-     * @param string $systemSymbol
-     * @param string $waypointSymbol
+     * @param string $token
+     * @param int|null $page
+     * @param int|null $limit
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getSystemWaypoint(string $systemSymbol, string $waypointSymbol): ResponseInterface
-    {
-        $this->logger->debug(
-            "Getting system waypoint details",
+    public function getSystemWaypointList(
+        string $systemSymbol,
+        string $token,
+        ?int $page = null,
+        ?int $limit = null
+    ): ResponseInterface {
+        return $this->paginatedGetRequest(
+            [
+                'systems/{systemSymbol}/waypoints',
+                [
+                    'systemSymbol' => $systemSymbol
+                ]
+            ],
+            $page,
+            $limit,
+            $token
         );
-        $response = $this->client->get(
-            $this->config['url'] . '/systems/'. $systemSymbol . '/waypoints/'. $waypointSymbol,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get system waypoint response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description View the details of a waypoint.
      * @param string $systemSymbol
      * @param string $waypointSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getSystemWaypointMarket(string $systemSymbol, string $waypointSymbol): ResponseInterface
+    public function getSystemWaypoint(string $systemSymbol, string $waypointSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting system waypoint market listings",
+        return $this->paginatedGetRequest(
+            [
+                'systems/{systemSymbol}/waypoints/{waypointSymbol}',
+                [
+                    'systemSymbol' => $systemSymbol,
+                    'waypointSymbol' => $waypointSymbol
+                ]
+            ],
+            null,
+            null,
+            $token
         );
-        $response = $this->client->get(
-            sprintf(
-                '%s/systems/%s/waypoints/%s/market',
-                $this->config['url'],
-                $systemSymbol,
-                $waypointSymbol
-            ),
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get system waypoint market response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be
+     *              purchased, and exchange goods can be purchased or sold. Send a ship to the waypoint to access trade
+     *              good prices and recent transactions.
      * @param string $systemSymbol
      * @param string $waypointSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getSystemWaypointShipyard(string $systemSymbol, string $waypointSymbol): ResponseInterface
-    {
-        $this->logger->debug(
-            "Getting system waypoint shipyard",
+    public function getSystemWaypointMarket(
+        string $systemSymbol,
+        string $waypointSymbol,
+        string $token
+    ): ResponseInterface {
+        return $this->paginatedGetRequest(
+            [
+                'systems/{systemSymbol}/waypoints/{waypointSymbol}/market',
+                [
+                    'systemSymbol' => $systemSymbol,
+                    'waypointSymbol' => $waypointSymbol
+                ]
+            ],
+            null,
+            null,
+            $token
         );
-        $response = $this->client->get(
-            sprintf(
-                '%s/systems/%s/waypoints/%s/shipyard',
-                $this->config['url'],
-                $systemSymbol,
-                $waypointSymbol
-            ),
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get system waypoint shipyard response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Get the shipyard for a waypoint.
      * @param string $systemSymbol
      * @param string $waypointSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getSystemWaypointJumpgate(string $systemSymbol, string $waypointSymbol): ResponseInterface
-    {
-        $this->logger->debug(
-            "Getting system waypoint jump-gate",
+    public function getSystemWaypointShipyard(
+        string $systemSymbol,
+        string $waypointSymbol,
+        string $token
+    ): ResponseInterface {
+        return $this->paginatedGetRequest(
+            [
+                'systems/{systemSymbol}/waypoints/{waypointSymbol}/shipyard',
+                [
+                    'systemSymbol' => $systemSymbol,
+                    'waypointSymbol' => $waypointSymbol
+                ]
+            ],
+            null,
+            null,
+            $token
         );
-        $response = $this->client->get(
-            sprintf(
-                '%s/systems/%s/waypoints/%s/jump-gate',
-                $this->config['url'],
-                $systemSymbol,
-                $waypointSymbol
-            ),
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get system waypoint jump-gate response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
-     * @param int $page
-     * @param int $limit
+     * @description Get jump gate details for a waypoint.
+     * @param string $systemSymbol
+     * @param string $waypointSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
-     * Todo: make pagination optional
      */
-    public function getFactionList(int $page, int $limit): ResponseInterface
-    {
-        $this->logger->debug(
-            "Getting faction list",
+    public function getSystemWaypointJumpgate(
+        string $systemSymbol,
+        string $waypointSymbol,
+        string $token
+    ): ResponseInterface {
+        return $this->paginatedGetRequest(
+            [
+                'systems/{systemSymbol}/waypoints/{waypointSymbol}/jump-gate',
+                [
+                    'systemSymbol' => $systemSymbol,
+                    'waypointSymbol' => $waypointSymbol
+                ]
+            ],
+            null,
+            null,
+            $token
         );
-        $response = $this->client->get(
-            $this->config['url'] . '/faction?page=' . $page . '&limit=' . $limit,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Faction list response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description List all discovered factions in the game.
+     * @param int|null $page
+     * @param int|null $limit
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    public function getFactionList(
+        ?int $page = null,
+        ?int $limit = null
+    ): ResponseInterface {
+        return $this->paginatedGetRequest('faction', $page, $limit);
+    }
+
+    /**
+     * @description View the details of a faction.
      * @param string $factionSymbol
      * @return ResponseInterface
      * @throws GuzzleException
      */
     public function getFaction(string $factionSymbol): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting faction details",
+        return $this->paginatedGetRequest(
+            [
+                'factions/{factionSymbol}',
+                [
+                    'factionSymbol' => $factionSymbol
+                ]
+            ]
         );
-        $response = $this->client->get(
-            $this->config['url'] . '/factions/'. $factionSymbol,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get faction response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Fetch your agent's details.
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getMyAgent(): ResponseInterface
+    public function getMyAgent(string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting my agent details",
-        );
-        $response = $this->client->get(
-            $this->config['url'] . '/my/agent',
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Faction list response", [$response->getBody()->getContents()]);
-        return $response;
+        return $this->paginatedGetRequest('my/agent', null, null, $token);
     }
 
     /**
-     * @param int $page
-     * @param int $limit
+     * @description List all of your contracts.
+     * @param string $token
+     * @param int|null $page
+     * @param int|null $limit
      * @return ResponseInterface
      * @throws GuzzleException
-     * Todo: make pagination optional
      */
-    public function getMyContractList(int $page, int $limit): ResponseInterface
+    public function getMyContractList(string $token, ?int $page = null, ?int $limit = null): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting my contract list",
-        );
-        $response = $this->client->get(
-            $this->config['url'] . '/my/contracts?page=' . $page . '&limit=' . $limit,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("My contract list response", [$response->getBody()->getContents()]);
-        return $response;
+        return $this->paginatedGetRequest('my/contracts', $page, $limit, $token);
     }
 
     /**
+     * @description Get the details of a contract by ID.
      * @param string $contractId
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getMyContract(string $contractId): ResponseInterface
+    public function getMyContract(string $contractId, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting My Contract details",
+        return $this->paginatedGetRequest(
+            [
+                'my/contracts/{contractId}',
+                [
+                    'contractId' => $contractId,
+                ]
+            ],
+            null,
+            null,
+            $token
         );
-        $response = $this->client->get(
-            $this->config['url'] . '/my/contracts/'. $contractId,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get My Contract response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Accept a contract.
      * @param string $contractId
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function acceptMyContract(string $contractId): ResponseInterface
+    public function acceptMyContract(string $contractId, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Post accept My Contract details",
+        return $this->postRequest(
+            [
+                'my/contracts/{contractId}/accept',
+                [
+                    'contractId' => $contractId,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/contracts/'. $contractId . '/accept',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("Accept My Contract response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Deliver cargo on a given contract.
      * @param string $contractId
      * @param string $shipSymbol
      * @param string $tradeSymbol
      * @param int $units
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
@@ -393,244 +529,246 @@ class ApiService
         string $contractId,
         string $shipSymbol,
         string $tradeSymbol,
-        int $units
+        int $units,
+        string $token
     ): ResponseInterface {
-        $this->logger->debug(
-            "post Deliver My Contract",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/contracts/'. $contractId . '/deliver',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                'my/contracts/{contractId}/deliver',
                 [
-                    'shipSymbol' => $shipSymbol,
-                    'tradeSymbol' => $tradeSymbol,
-                    'units' => $units
+                    'contractId' => $contractId,
                 ]
-            )
+            ],
+            [
+                'shipSymbol' => $shipSymbol,
+                'tradeSymbol' => $tradeSymbol,
+                'units' => $units
+            ],
+            $token
         );
-        $this->logger->debug("post deliver My Contract response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Fulfill a contract
      * @param string $contractId
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function fulfillMyContract(string $contractId): ResponseInterface
+    public function fulfillMyContract(string $contractId, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Post fulfill My Contract details",
+        return $this->postRequest(
+            [
+                'my/contracts/{contractId}/fulfill',
+                [
+                    'contractId' => $contractId,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/contracts/'. $contractId . '/fulfill',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("Fulfill My Contract response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
-     * @param int $page
-     * @param int $limit
+     * @description Retrieve all of your ships.
+     * @param string $token
+     * @param int|null $page
+     * @param int|null $limit
      * @return ResponseInterface
      * @throws GuzzleException
-     * Todo: make pagination optional
      */
-    public function getMyShipList(int $page, int $limit): ResponseInterface
+    public function getMyShipList(string $token, ?int $page = null, ?int $limit = null): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting my ship list",
-        );
-        $response = $this->client->get(
-            $this->config['url'] . '/my/ships?page=' . $page . '&limit=' . $limit,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("My ships list response", [$response->getBody()->getContents()]);
-        return $response;
+        return $this->paginatedGetRequest('my/ships', $page, $limit, $token);
     }
 
     /**
+     * @description Purchase a ship.
      * @param ShipType $shipType
      * @param string $waypointSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function buyShip(ShipType $shipType, string $waypointSymbol): ResponseInterface
+    public function buyShip(ShipType $shipType, string $waypointSymbol, string $token): ResponseInterface
     {
         $this->logger->debug(
             "Buying new ship {type} at location {waypointSymbol}",
             ['waypointSymbol' => $waypointSymbol, 'shipType' => $shipType]
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            'my/ships',
+            [
+                'shipType' => $shipType->name,
+                'waypointSymbol' => $waypointSymbol
+            ],
+            $token
+        );
+    }
+
+    /**
+     * @description Retrieve the details of your ship.
+     * @param string $shipSymbol
+     * @param string $token
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    public function getMyShip(string $shipSymbol, string $token): ResponseInterface
+    {
+        return $this->paginatedGetRequest(
+            [
+                'my/ships/{shipSymbol}',
                 [
-                    'json' => [
-                        'shipType' => $shipType->name,
-                        'waypointSymbol' => $waypointSymbol
-                    ]
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            null,
+            null,
+            $token
         );
-        $this->logger->debug("Ship buying response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Retrieve the cargo of your ship.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getMyShip(string $shipSymbol): ResponseInterface
+    public function getMyShipCargo(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting My Ship details",
+        return $this->paginatedGetRequest(
+            [
+                'my/ships/{shipSymbol}/cargo',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            null,
+            null,
+            $token
         );
-        $response = $this->client->get(
-            $this->config['url'] . '/my/ships/'. $shipSymbol,
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Attempt to move your ship into orbit at it`s current location. The request will only succeed if
+     *              your ship is capable of moving into orbit at the time of the request.
+     *              The endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getMyShipCargo(string $shipSymbol): ResponseInterface
+    public function orbitMyShip(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting My Ship cargo",
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/orbit',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->get(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/cargo',
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get My Ship cargo response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
-     * @param string $shipSymbol
-     * @return ResponseInterface
-     * @throws GuzzleException
-     */
-    public function orbitMyShip(string $shipSymbol): ResponseInterface
-    {
-        $this->logger->debug(
-            "post orbit My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/orbit',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("post orbit My Ship response", [$response->getBody()->getContents()]);
-        return $response;
-    }
-
-    /**
+     * @description Attempt to refine the raw materials on your ship. The request will only succeed if your ship is
+     *              capable of refining at the time of the request.
      * @param string $shipSymbol
      * @param OreType $produce
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function refineOreOnMyShip(string $shipSymbol, OreType $produce): ResponseInterface
+    public function refineOreOnMyShip(string $shipSymbol, OreType $produce, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post refine My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/refine',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/refine',
                 [
-                    'json' => [
-                        'produce' => $produce->name
-                    ]
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            [
+                'produce' => $produce->name
+            ],
+            $token
         );
-        $this->logger->debug("post refine My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Command a ship to chart the current waypoint.
+     *              Waypoints in the universe are uncharted by default. These locations will not show up in the API
+     *              until they have been charted by a ship.
+     *              Charting a location will record your agent as the one who created the chart.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function chartMyShip(string $shipSymbol): ResponseInterface
+    public function chartMyShip(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post chart My Ship",
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/chart',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/chart',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("post chart My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Retrieve the details of your ship's reactor cooldown. Some actions such as activating your jump
+     *              drive, scanning, or extracting resources taxes your reactor and results in a cooldown.
+     *              Your ship cannot perform additional actions until your cooldown has expired. The duration of your
+     *              cooldown is relative to the power consumption of the related modules or mounts for the action taken.
+     *              Response returns a 204 status code (no-content) when the ship has no cooldown.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getMyShipCooldown(string $shipSymbol): ResponseInterface
+    public function getMyShipCooldown(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting My Ship Cooldown",
+        return $this->paginatedGetRequest(
+            [
+                'my/ships/{shipSymbol}/cooldown',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            null,
+            null,
+            $token
         );
-        $response = $this->client->get(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/cooldown',
-            array_merge_recursive(
-                $this->options
-            )
-        );
-        $this->logger->debug("Get My Ship cooldown response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
+     * @description Attempt to dock your ship at it´s current location. Docking will only succeed if the waypoint is a
+     *              dockable location, and your ship is capable of docking at the time of the request.
+     *              The endpoint is idempotent - successive calls will succeed even if the ship is already docked.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function dockMyShip(string $shipSymbol): ResponseInterface
+    public function dockMyShip(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post dock My Ship",
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/dock',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/dock',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("post dock My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -641,23 +779,22 @@ class ApiService
      *              Surveys will eventually expire after a period of time. Multiple ships can use the
      *              same survey for extraction.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function surveyMyShip(string $shipSymbol): ResponseInterface
+    public function surveyMyShip(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post dock My Ship",
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/dock',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/survey',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("post survey My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -665,30 +802,27 @@ class ApiService
      *              target specific yields.
      * @param string $shipSymbol
      * @param Survey|null $survey
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function extractOreMyShip(string $shipSymbol, ?Survey $survey = null): ResponseInterface
+    public function extractOreMyShip(string $shipSymbol, ?Survey $survey, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post extract My Ship",
-        );
         $data = [];
         if (!empty($survey)) {
             $data['survey'] = $survey;
         }
 
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/extract',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/extract',
                 [
-                    'json' => $data
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            $data,
+            $token
         );
-        $this->logger->debug("post extract My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -696,28 +830,25 @@ class ApiService
      * @param string $shipSymbol
      * @param string $symbol
      * @param int $units
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function jettisonFromMyShip(string $shipSymbol, string $symbol, int $units = 1): ResponseInterface
+    public function jettisonFromMyShip(string $shipSymbol, string $symbol, int $units, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post jettison My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/jettison',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/jettison',
                 [
-                    'json' => [
-                        'symbol' => $symbol,
-                        'units'  => $units
-                    ]
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            [
+                'symbol' => $symbol,
+                'units'  => $units
+            ],
+            $token
         );
-        $this->logger->debug("post refine My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -725,27 +856,24 @@ class ApiService
      *              a unit of antimatter.
      * @param string $shipSymbol
      * @param string $systemSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function jumpMyShip(string $shipSymbol, string $systemSymbol): ResponseInterface
+    public function jumpMyShip(string $shipSymbol, string $systemSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post jump My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/jump',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/jump',
                 [
-                    'json' => [
-                        'systemSymbol' => $systemSymbol
-                    ]
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            [
+                'systemSymbol' => $systemSymbol
+            ],
+            $token
         );
-        $this->logger->debug("post jump My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -757,27 +885,24 @@ class ApiService
      *              To travel between systems, see the ship's warp or jump actions.
      * @param string $shipSymbol
      * @param string $waypointSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function navigateMyShip(string $shipSymbol, string $waypointSymbol): ResponseInterface
+    public function navigateMyShip(string $shipSymbol, string $waypointSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post navigate My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/navigate',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/navigate',
                 [
-                    'json' => [
-                        'waypointSymbol' => $waypointSymbol
-                    ]
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            [
+                'waypointSymbol' => $waypointSymbol
+            ],
+            $token
         );
-        $this->logger->debug("post navigate My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**

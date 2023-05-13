@@ -19,11 +19,10 @@ GuzzleHttp\Client:
 App\SpaceTraders\ApiService:
   url: 'https://api.spacetraders.io/v2'
   headers:
-    Authorization: 'Bearer %s'
     Accept: 'application/json'
     Content-Type: 'application/json'
   token: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiTUNEVUNLIiwiaWF0IjoxNjgzNjI1MDY5LCJzdWIiOiJhZ2VudC10b2tlbiJ9.WsfbBvtmP7EDD62RHkr4znucTWFMKR4fkBi6NR7e-yl47IBRkkVRtFGGLM8VT67TcQBFRKYy8yoZwxPvOAoAIkgayAg-aeScfqoFsYusLkkZJEV-XfBpY7LabPdVSyC1_t9EKSlug0ktsA6o5t_diGt1DqWfTcfwpLTBzZA61UEwKnR9NtwSVIeZx-JhGJOjZA7uUKmCEyvjSa6_GofL706MfQVpuoAPt64KhaiabX1mmN4ucS98VZ4QS1AagSuOztVixrR-uw-6hlyanU6JmDyvRLajSKe05qso6cIa3hzBmmF7ZuxzfxjGToS1g8y_PK-qNyhydM2Y5xQvHKtDZ1245_4PsLW07zZGGOPA_nlWlWUP4hCSTnNku9xKlGGNCpCtiWIOhXwUMtqn0-tcuH7RyTXKHSTkWGeEWzlPBkM6vickIJ5O0axsEmT5Cd_KDOPKC7YS9nDL6gBOO1NfCZ38IzuoMn0zk9HuLvFvANgiExpFqiYo5ZD2mnLghaqN'
-
+  authHeader: 'Bearer %s'
 
 App\Persistence\EntityManagerFactory:
   foo: bar
