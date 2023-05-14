@@ -946,27 +946,24 @@ class ApiService
      *              Most ship actions are unavailable until the ship has arrived at it's destination.
      * @param string $shipSymbol
      * @param string $waypointSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function warpMyShip(string $shipSymbol, string $waypointSymbol): ResponseInterface
+    public function warpMyShip(string $shipSymbol, string $waypointSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post warp My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/warp',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/warp',
                 [
-                    'json' => [
-                        'waypointSymbol' => $waypointSymbol
-                    ]
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            [
+                'waypointSymbol' => $waypointSymbol
+            ],
+            $token
         );
-        $this->logger->debug("post warp My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -974,116 +971,109 @@ class ApiService
      * @param string $shipSymbol
      * @param string $symbol
      * @param int $units
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function sellFromMyShip(string $shipSymbol, string $symbol, int $units = 1): ResponseInterface
+    public function sellFromMyShip(string $shipSymbol, string $symbol, int $units, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post sell from My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/sell',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/sell',
                 [
-                    'json' => [
-                        'symbol' => $symbol,
-                        'units'  => $units
-                    ]
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            [
+                'symbol' => $symbol,
+                'units'  => $units
+            ],
+            $token
         );
-        $this->logger->debug("post sell from My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
      * @description Activate your ship's sensor arrays to scan for system information.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function scanSystemsAtMyShip(string $shipSymbol): ResponseInterface
+    public function scanSystemsAtMyShip(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post scan system My Ship",
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/scan/systems',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/scan/systems',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("post scan system My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
      * @description Activate your ship's sensor arrays to scan for waypoint information.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function scanWaypointsAtMyShip(string $shipSymbol): ResponseInterface
+    public function scanWaypointsAtMyShip(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post scan waypoints My Ship",
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/scan/waypoints',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/scan/waypoints',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("post scan waypoints My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
      * @description Activate your ship's sensor arrays to scan for ship information.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function scanShipsAtMyShip(string $shipSymbol): ResponseInterface
+    public function scanShipsAtMyShip(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post scan ships My Ship",
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/scan/ships',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/scan/ships',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("post scan waypoints My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
      * @description Refuel your ship from the local market.
      * @param string $shipSymbol
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function refuelMyShip(string $shipSymbol): ResponseInterface
+    public function refuelMyShip(string $shipSymbol, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post refuel My Ship",
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/scan/refuel',
+                [
+                    'shipSymbol' => $shipSymbol,
+                ]
+            ],
+            [],
+            $token
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/refuel',
-            array_merge_recursive(
-                $this->options,
-                []
-            )
-        );
-        $this->logger->debug("post refuel My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -1091,28 +1081,25 @@ class ApiService
      * @param string $shipSymbol
      * @param string $symbol
      * @param int $units
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function purchaseToMyShip(string $shipSymbol, string $symbol, int $units = 1): ResponseInterface
+    public function purchaseToMyShip(string $shipSymbol, string $symbol, int $units, string $token): ResponseInterface
     {
-        $this->logger->debug(
-            "post purchase to My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/purchase',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/purchase',
                 [
-                    'json' => [
-                        'symbol' => $symbol,
-                        'units'  => $units
-                    ]
+                    'shipSymbol' => $shipSymbol,
                 ]
-            )
+            ],
+            [
+                'symbol' => $symbol,
+                'units'  => $units
+            ],
+            $token
         );
-        $this->logger->debug("post purchase to My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -1121,6 +1108,7 @@ class ApiService
      * @param string $toShipSymbol
      * @param string $symbol
      * @param int $units
+     * @param string $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
@@ -1128,26 +1116,23 @@ class ApiService
         string $fromShipSymbol,
         string $toShipSymbol,
         string $symbol,
-        int $units = 1
+        int $units,
+        string $token
     ): ResponseInterface {
-        $this->logger->debug(
-            "post transfer from My Ship",
-        );
-        $response = $this->client->post(
-            $this->config['url'] . '/my/ships/'. $fromShipSymbol . '/transfer',
-            array_merge_recursive(
-                $this->options,
+        return $this->postRequest(
+            [
+                '/my/ships/{shipSymbol}/transfer',
                 [
-                    'json' => [
-                        'tradeSymbol' => $symbol,
-                        'units'  => $units,
-                        'shipSymbol' => $toShipSymbol
-                    ]
+                    'shipSymbol' => $fromShipSymbol,
                 ]
-            )
+            ],
+            [
+                'symbol' => $symbol,
+                'units'  => $units,
+                'shipSymbol' => $toShipSymbol
+            ],
+            $token
         );
-        $this->logger->debug("post transfer from My Ship response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**
@@ -1156,17 +1141,6 @@ class ApiService
      */
     public function getServerStatus(): ResponseInterface
     {
-        $this->logger->debug(
-            "Getting server status",
-        );
-        var_dump($this->config['url']);
-        var_dump($this->options);
-
-        $response = $this->client->get(
-            $this->config['url'] //,
-            //$this->options
-        );
-        $this->logger->debug("Get server status response", [$response->getBody()->getContents()]);
-        return $response;
+        return $this->paginatedGetRequest('');
     }
 }
