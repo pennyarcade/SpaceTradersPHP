@@ -156,6 +156,7 @@ class ApiService
                 'statusCode' => $response->getStatusCode()
             ]
         );
+        $response->getBody()->rewind();
         return $response;
     }
 
@@ -197,6 +198,8 @@ class ApiService
                 'statusCode' => $response->getStatusCode()
             ]
         );
+        $response->getBody()->rewind();
+
         return $response;
     }
 
@@ -225,24 +228,13 @@ class ApiService
      */
     public function register(FactionName $faction, string $symbol): ResponseInterface
     {
-        $this->logger->debug(
-            "Registering new user {symbol}, faction {faction}",
-            ['symbol' => $symbol, 'faction' => $faction]
+        return $this->postRequest(
+            'register',
+            [
+                'faction' => (string)$faction->name,
+                'symbol' => $symbol
+            ]
         );
-        $response = $this->client->post(
-            $this->config['url'] . '/register',
-            array_merge_recursive(
-                $this->options,
-                [
-                    'json' => [
-                        'faction' => $faction->name,
-                        'symbol' => $symbol
-                    ]
-                ]
-            )
-        );
-        $this->logger->debug("Register response", [$response->getBody()->getContents()]);
-        return $response;
     }
 
     /**

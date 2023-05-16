@@ -2,6 +2,7 @@
 <?php
 
 use App\Console\Agent\Register;
+use App\Console\Helper\ServerStatus;
 use App\Utility\PsrCompatibleContainer;
 use Symfony\Component\Console\Application;
 
@@ -13,5 +14,6 @@ $container = require_once __DIR__ . '/../app/bootstrap.php';
 
 $application = new Application();
 $application->add(new Register($container));
+$application->add(new ServerStatus($container));
 
 $application->run();
