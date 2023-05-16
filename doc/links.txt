@@ -5,4 +5,8 @@ https://github.com/MacFJA/Symfony-Console-Filechooser
 https://github.com/eFrane/ConsoleAdditions
 https://packagist.org/packages/phlib/console-configuration
 
-
+https://stackoverflow.com/questions/39151234/install-ncurses-extensions-on-php7-0
+https://github.com/OOPS-ORG-PHP/mod_ncurses
+https://github.com/aurora-php/ncurses
+https://github.com/octris/pecl_ncurses
+https://github.com/octris/pecl_ncurses

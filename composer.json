@@ -17,10 +17,12 @@
   ],
   "require": {
     "php": "^8.1",
+    "ext-ncurses":  "*",
     "doctrine/dbal": "^3.6",
     "doctrine/orm": "^2.15",
     "guzzlehttp/guzzle": "^7.5",
     "monolog/monolog": "^3.3.1",
+    "octris/ncurses": "dev-master",
     "pbergman/tree-helper": "^1.0.2",
     "phpunit/phpunit": "^10.1.2",
     "pimple/pimple": "~3.5",
@@ -58,5 +60,11 @@
   },
   "scripts": {
     "test": "phpunit --colors=always --configuration ./tests/phpunit.xml"
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/aurora-php/ncurses"
+    }
+  ]
 }
