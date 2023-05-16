@@ -4,7 +4,7 @@
 # Configure Logger (Monolog)
 Psr\Log\LoggerInterface:
   name: 'app.log'
-  path: 'logs'
+  path: 'var/log'
   level: debug
   maxFiles: 7
   logServerEnabled: false

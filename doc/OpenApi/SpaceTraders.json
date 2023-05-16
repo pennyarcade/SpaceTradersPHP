@@ -5,7 +5,7 @@
             "email": "joel@spacetraders.io",
             "name": "Joel Brubaker"
         },
-        "description": "SpaceTraders is an open-universe game and learning platform that offers a set of HTTP endpoints to control a fleet of ships and explore a multiplayer universe.\n\nThe API is documented using [OpenAPI](https://github.com/SpaceTradersAPI/api-docs). You can send your first request right here in your browser to check the status of the game server.\n\n```json http\n{\n    \"method\": \"GET\",\n    \"url\": \"https://api.spacetraders.io/v2\",\n}\n```\n\nUnlike a traditional game, SpaceTraders does not have a first-party client or app to play the game. Instead, you can use the API to build your own client, write a script to automate your ships, or try an app built by the community.\n\nWe have a [Discord channel](https://discord.com/invite/jh6zurdWk5) where you can share your projects, ask questions, and get help from other players.\n\n\n",
+        "description": "SpaceTraders is an open-universe game and learning platform that offers a set of HTTP endpoints to control a fleet of ships and explore a multiplayer universe.\n\nThe API is documented using [OpenAPI](https://github.com/SpaceTradersAPI/api-docs). You can send your first request right here in your browser to check the status of the game server.\n\n```json http\n{\n  \"method\": \"GET\",\n  \"url\": \"https://api.spacetraders.io/v2\",\n}\n```\n\nUnlike a traditional game, SpaceTraders does not have a first-party client or app to play the game. Instead, you can use the API to build your own client, write a script to automate your ships, or try an app built by the community.\n\nWe have a [Discord channel](https://discord.com/invite/jh6zurdWk5) where you can share your projects, ask questions, and get help from other players.\n\n\n",
         "license": {
             "name": "No Permission",
             "url": "https://choosealicense.com/no-permission/"
@@ -83,6 +83,10 @@
                                         "maxLength": 14,
                                         "minLength": 3,
                                         "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Your email address. This is used if you reserved your call sign between resets."
                                     }
                                 },
                                 "required": [
@@ -444,7 +448,7 @@
         },
         "/systems/{systemSymbol}/waypoints/{waypointSymbol}/shipyard": {
             "get": {
-                "description": "Get the shipyard for a waypoint.",
+                "description": "Get the shipyard for a waypoint. Send a ship to the waypoint to access ships that are currently available for purchase and recent transactions.",
                 "operationId": "get-shipyard",
                 "responses": {
                     "200": {

@@ -42,8 +42,8 @@ class ServerStatus extends BaseCommand
         $this->api->toggleExceptions();
         // TODO: Call without token
         $response = $this->api->getServerStatus();
-        $result = json_decode($response->getBody()->getContents());
-        var_dump($result);
+        $result = json_decode($response->getBody()->getContents(), true);
+        var_dump($result['leaderboards']);
         return 0;
     }
 

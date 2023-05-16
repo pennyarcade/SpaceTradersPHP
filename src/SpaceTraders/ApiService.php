@@ -33,7 +33,7 @@ class ApiService
         /** @var array $settings */
         $settings = $container->get('settings');
         $this->config = $settings[self::class];
-        $this->logger = $container->get(LoggerFactory::class)->getRotatingFileLogger('CheckMkService');
+        $this->logger = $container->get(LoggerFactory::class)->getRotatingFileLogger('ApiService');
 
         $this->client = new Client(
             array_merge_recursive(
@@ -223,18 +223,21 @@ class ApiService
      *              to retrieve payment.
      * @param FactionName $faction
      * @param string $symbol
+     * @param string|null $email
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function register(FactionName $faction, string $symbol): ResponseInterface
+    public function register(FactionName $faction, string $symbol, ?string $email): ResponseInterface
     {
-        return $this->postRequest(
-            'register',
-            [
-                'faction' => (string)$faction->name,
-                'symbol' => $symbol
-            ]
-        );
+        $data = [
+            'faction' => (string)$faction->name,
+            'symbol' => $symbol
+        ];
+        if (!empty($email)) {
+            $data['email'] =  $email;
+        }
+
+        return $this->postRequest('register', $data);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
+use App\SpaceTraders\Enum\SystemType;
 use JsonSerializable;
 
 class ConnectedSystem implements JsonSerializable, Deserializable
