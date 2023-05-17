@@ -47,7 +47,7 @@ jobs:
       # You may pin to the exact commit or the version.
       # uses: php-actions/phpcs@dfdd77a6edfc6d0d0f194bdf0c934c8d841ea2fa
       uses: php-actions/phpcs@v1.0.0
-      #with:
+      with:
         # What version of PHPCS to use
         #version: # optional, default is latest
         # What version of PHP to use
@@ -55,7 +55,7 @@ jobs:
         # Path to a vendored phpcs binary
         #vendored_phpcs_path: # optional
         # One or more files and/or directories to check
-        #path:
+        path: ./src
         # The name or path of the coding standard to use
         #standard:
         # A comma separated list of sniff codes to include checking (all sniffs must be part of the specified standard)
@@ -65,7 +65,7 @@ jobs:
         # A comma separated list of patterns to ignore files and directories
         #ignore: # optional
         # The number of spaces each tab represents
-        #tab_width: # optional
+        tab_width: 4
         # Print either the "full", "xml", "checkstyle", "csv", "json", "junit", "emacs", "source", "summary", "diff", "svnblame", "gitblame", "hgblame" or "notifysend" report, or specify the path to a custom report class, (the "full" report is printed by default)
         #report: # default is full
         # Write the report to the specified file path
