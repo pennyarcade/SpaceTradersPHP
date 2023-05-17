@@ -41,7 +41,7 @@ jobs:
       # You may pin to the exact commit or the version.
       # uses: php-actions/phpcs@dfdd77a6edfc6d0d0f194bdf0c934c8d841ea2fa
       uses: php-actions/phpcs@v1.0.0
-      with:
+      #with:
         # What version of PHPCS to use
         #version: # optional, default is latest
         # What version of PHP to use
