@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../ncurses-php5/.idea/ncurses-php5.iml" filepath="$PROJECT_DIR$/../ncurses-php5/.idea/ncurses-php5.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spaceTraderPHP.iml" filepath="$PROJECT_DIR$/.idea/spaceTraderPHP.iml" />
     </modules>
   </component>
