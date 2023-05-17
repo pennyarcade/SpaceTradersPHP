@@ -57,7 +57,7 @@ jobs:
         # One or more files and/or directories to check
         path: ./src
         # The name or path of the coding standard to use
-        standard: PSR12, PSR1, PSR2
+        standard: PSR12,PSR1,PSR2
         # A comma separated list of sniff codes to include checking (all sniffs must be part of the specified standard)
         #sniffs: # optional
         # A comma separated list of sniff codes to exclude from checking (all sniffs must be part of the specified standard)
