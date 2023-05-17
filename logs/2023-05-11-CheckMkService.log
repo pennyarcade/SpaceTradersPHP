@@ -1,6 +1,0 @@
-[2023-05-11T15:06:35.146773+00:00] CheckMkService.DEBUG: Getting server status [] {"process_id":683561,"uid":"e66900e"}
-[2023-05-11T15:08:12.079872+00:00] CheckMkService.DEBUG: Getting server status [] {"process_id":683772,"uid":"24c960c"}
-[2023-05-11T15:09:39.313249+00:00] CheckMkService.DEBUG: Getting server status [] {"process_id":684269,"uid":"3e0eba0"}
-[2023-05-11T15:12:33.103565+00:00] CheckMkService.DEBUG: Getting server status [] {"process_id":684788,"uid":"3839528"}
-[2023-05-11T15:13:09.441441+00:00] CheckMkService.DEBUG: Getting server status [] {"process_id":684976,"uid":"8197315"}
-[2023-05-11T15:13:12.014488+00:00] CheckMkService.DEBUG: Getting server status [] {"process_id":684995,"uid":"7b044ba"}
