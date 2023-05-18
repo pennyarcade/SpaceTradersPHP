@@ -54,13 +54,14 @@ class PhpcsSarifReport implements Report
                                 'artifactLocation' => [
                                      'uri' => $filename,
                                      'uriBaseId' => self::URI_BASE_ID
-                                ]
+                                ],
+                                'region'     => [
+                                    'startLine' => $line,
+                                    'startColumn' => $column
+                                ],
                             ]
                         ],
-                        'region'     => [
-                            'startLine' => $line,
-                            'startColumn' => $column
-                        ],
+
                         'properties' => [
                             'identifier' => $error['source'],
                             'severity' => $error['severity'],
