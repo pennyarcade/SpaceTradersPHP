@@ -17,16 +17,18 @@ class ScannedShip implements JsonSerializable, Deserializable
     protected ?ShipFrame $frameSymbol;
     protected ?ShipReactorSymbolType $reactorSymbol;
     protected ShipEngineSymbolType $engineSymbol;
-    /** @var ?ShipMountSymbolType[] $mounts */
+    /**
+     * @var ?ShipMountSymbolType[] $mounts
+     */
     protected ?array $mounts;
 
     /**
-     * @param string $symbol
-     * @param ShipRegistration $registration
-     * @param ShipNav $nav
-     * @param ShipFrame|null $frameSymbol
+     * @param string                     $symbol
+     * @param ShipRegistration           $registration
+     * @param ShipNav                    $nav
+     * @param ShipFrame|null             $frameSymbol
      * @param ShipReactorSymbolType|null $reactorSymbol
-     * @param ShipEngineSymbolType $engineSymbol
+     * @param ShipEngineSymbolType       $engineSymbol
      * @param ShipMountSymbolType[]|null $mounts
      */
     public function __construct(
@@ -56,7 +58,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return ScannedShip
      */
     public function setSymbol(string $symbol): ScannedShip
@@ -74,7 +76,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipRegistration $registration
+     * @param  ShipRegistration $registration
      * @return ScannedShip
      */
     public function setRegistration(ShipRegistration $registration): ScannedShip
@@ -92,7 +94,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipNav $nav
+     * @param  ShipNav $nav
      * @return ScannedShip
      */
     public function setNav(ShipNav $nav): ScannedShip
@@ -110,7 +112,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipFrame|null $frameSymbol
+     * @param  ShipFrame|null $frameSymbol
      * @return ScannedShip
      */
     public function setFrameSymbol(?ShipFrame $frameSymbol): ScannedShip
@@ -128,7 +130,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipReactorSymbolType|null $reactorSymbol
+     * @param  ShipReactorSymbolType|null $reactorSymbol
      * @return ScannedShip
      */
     public function setReactorSymbol(?ShipReactorSymbolType $reactorSymbol): ScannedShip
@@ -146,7 +148,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipEngineSymbolType $engineSymbol
+     * @param  ShipEngineSymbolType $engineSymbol
      * @return ScannedShip
      */
     public function setEngineSymbol(ShipEngineSymbolType $engineSymbol): ScannedShip
@@ -164,7 +166,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array|null $mounts
+     * @param  array|null $mounts
      * @return ScannedShip
      */
     public function setMounts(?array $mounts): ScannedShip

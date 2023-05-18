@@ -43,7 +43,7 @@ class Agent extends AgentDto
     }
 
     /**
-     * @param string $token
+     * @param  string $token
      * @return Agent
      */
     public function setToken(string $token): Agent
@@ -61,7 +61,7 @@ class Agent extends AgentDto
     }
 
     /**
-     * @param int $id
+     * @param  int $id
      * @return Agent
      */
     public function setId(int $id): Agent
@@ -79,7 +79,7 @@ class Agent extends AgentDto
     }
 
     /**
-     * @param DateTime $created
+     * @param  DateTime $created
      * @return Agent
      */
     public function setCreated(DateTime $created): Agent
@@ -97,7 +97,7 @@ class Agent extends AgentDto
     }
 
     /**
-     * @param DateTime $changed
+     * @param  DateTime $changed
      * @return Agent
      */
     public function setChanged(DateTime $changed): Agent
@@ -115,7 +115,7 @@ class Agent extends AgentDto
     }
 
     /**
-     * @param DateTime|null $expires
+     * @param  DateTime|null $expires
      * @return Agent
      */
     public function setExpires(?DateTime $expires): Agent
@@ -133,5 +133,4 @@ class Agent extends AgentDto
             $this->setCreated(new DateTime('now'));
         }
     }
-
 }

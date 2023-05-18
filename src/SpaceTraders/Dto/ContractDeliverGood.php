@@ -15,8 +15,8 @@ class ContractDeliverGood implements JsonSerializable, Deserializable
     /**
      * @param string $tradeSymbol
      * @param string $destinationSymbol
-     * @param int $unitsRequired
-     * @param int $unitsFulfilled
+     * @param int    $unitsRequired
+     * @param int    $unitsFulfilled
      */
     public function __construct(string $tradeSymbol, string $destinationSymbol, int $unitsRequired, int $unitsFulfilled)
     {
@@ -35,7 +35,7 @@ class ContractDeliverGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $tradeSymbol
+     * @param  string $tradeSymbol
      * @return ContractDeliverGood
      */
     public function setTradeSymbol(string $tradeSymbol): ContractDeliverGood
@@ -53,7 +53,7 @@ class ContractDeliverGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $destinationSymbol
+     * @param  string $destinationSymbol
      * @return ContractDeliverGood
      */
     public function setDestinationSymbol(string $destinationSymbol): ContractDeliverGood
@@ -71,7 +71,7 @@ class ContractDeliverGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $unitsRequired
+     * @param  int $unitsRequired
      * @return ContractDeliverGood
      */
     public function setUnitsRequired(int $unitsRequired): ContractDeliverGood
@@ -89,7 +89,7 @@ class ContractDeliverGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $unitsFulfilled
+     * @param  int $unitsFulfilled
      * @return ContractDeliverGood
      */
     public function setUnitsFulfilled(int $unitsFulfilled): ContractDeliverGood

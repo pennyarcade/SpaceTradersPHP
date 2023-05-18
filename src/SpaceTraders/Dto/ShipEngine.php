@@ -17,11 +17,11 @@ class ShipEngine implements JsonSerializable, Deserializable
 
     /**
      * @param ShipEngineSymbolType $symbol
-     * @param string $name
-     * @param string $description
-     * @param int $condition
-     * @param float $speed
-     * @param ShipRequirements $requirements
+     * @param string               $name
+     * @param string               $description
+     * @param int                  $condition
+     * @param float                $speed
+     * @param ShipRequirements     $requirements
      */
     public function __construct(
         ShipEngineSymbolType $symbol,
@@ -48,7 +48,7 @@ class ShipEngine implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipEngineSymbolType $symbol
+     * @param  ShipEngineSymbolType $symbol
      * @return ShipEngine
      */
     public function setSymbol(ShipEngineSymbolType $symbol): ShipEngine
@@ -66,7 +66,7 @@ class ShipEngine implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return ShipEngine
      */
     public function setName(string $name): ShipEngine
@@ -84,7 +84,7 @@ class ShipEngine implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return ShipEngine
      */
     public function setDescription(string $description): ShipEngine
@@ -102,7 +102,7 @@ class ShipEngine implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $condition
+     * @param  int $condition
      * @return ShipEngine
      */
     public function setCondition(int $condition): ShipEngine
@@ -120,7 +120,7 @@ class ShipEngine implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param float $speed
+     * @param  float $speed
      * @return ShipEngine
      */
     public function setSpeed(float $speed): ShipEngine
@@ -138,7 +138,7 @@ class ShipEngine implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipRequirements $requirements
+     * @param  ShipRequirements $requirements
      * @return ShipEngine
      */
     public function setRequirements(ShipRequirements $requirements): ShipEngine

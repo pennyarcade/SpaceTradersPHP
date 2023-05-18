@@ -16,12 +16,12 @@ class ScannedSystem implements JsonSerializable, Deserializable
     protected int $distance;
 
     /**
-     * @param string $symbol
-     * @param string $sectorSymbol
+     * @param string     $symbol
+     * @param string     $sectorSymbol
      * @param SystemType $type
-     * @param int $x
-     * @param int $y
-     * @param int $distance
+     * @param int        $x
+     * @param int        $y
+     * @param int        $distance
      */
     public function __construct(string $symbol, string $sectorSymbol, SystemType $type, int $x, int $y, int $distance)
     {
@@ -42,7 +42,7 @@ class ScannedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return ScannedSystem
      */
     public function setSymbol(string $symbol): ScannedSystem
@@ -60,7 +60,7 @@ class ScannedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $sectorSymbol
+     * @param  string $sectorSymbol
      * @return ScannedSystem
      */
     public function setSectorSymbol(string $sectorSymbol): ScannedSystem
@@ -78,7 +78,7 @@ class ScannedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param SystemType $type
+     * @param  SystemType $type
      * @return ScannedSystem
      */
     public function setType(SystemType $type): ScannedSystem
@@ -96,7 +96,7 @@ class ScannedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $x
+     * @param  int $x
      * @return ScannedSystem
      */
     public function setX(int $x): ScannedSystem
@@ -114,7 +114,7 @@ class ScannedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $y
+     * @param  int $y
      * @return ScannedSystem
      */
     public function setY(int $y): ScannedSystem
@@ -132,7 +132,7 @@ class ScannedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $distance
+     * @param  int $distance
      * @return ScannedSystem
      */
     public function setDistance(int $distance): ScannedSystem

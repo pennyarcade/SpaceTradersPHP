@@ -14,8 +14,8 @@ class WaypointTrait implements JsonSerializable, Deserializable
 
     /**
      * @param WaypointTraitSymbolType $symbol
-     * @param string $name
-     * @param string $description
+     * @param string                  $name
+     * @param string                  $description
      */
     public function __construct(WaypointTraitSymbolType $symbol, string $name, string $description)
     {
@@ -33,7 +33,7 @@ class WaypointTrait implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param WaypointTraitSymbolType $symbol
+     * @param  WaypointTraitSymbolType $symbol
      * @return WaypointTrait
      */
     public function setSymbol(WaypointTraitSymbolType $symbol): WaypointTrait
@@ -51,7 +51,7 @@ class WaypointTrait implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return WaypointTrait
      */
     public function setName(string $name): WaypointTrait
@@ -69,7 +69,7 @@ class WaypointTrait implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return WaypointTrait
      */
     public function setDescription(string $description): WaypointTrait

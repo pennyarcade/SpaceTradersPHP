@@ -32,8 +32,7 @@ class Register extends BaseCommand
                 'factionSymbol',
                 InputArgument::OPTIONAL,
                 'Your faction symbol: ' . implode(', ', array_column(FactionName::cases(), 'name'))
-            )
-        ;
+            );
     }
 
     /**
@@ -47,7 +46,7 @@ class Register extends BaseCommand
 
     /**
      * @inheritDoc
-     * @throws GuzzleException
+     * @throws     GuzzleException
      */
     protected function perform(): int
     {

@@ -9,12 +9,14 @@ class JumpGate implements JsonSerializable, Deserializable
 {
     protected float $jumpRange;
     protected string $factionSymbol;
-    /** @var ConnectedSystem[] $connectedSystems */
+    /**
+     * @var ConnectedSystem[] $connectedSystems
+     */
     protected array $connectedSystems;
 
     /**
-     * @param float $jumpRange
-     * @param string $factionSymbol
+     * @param float             $jumpRange
+     * @param string            $factionSymbol
      * @param ConnectedSystem[] $connectedSystems
      */
     public function __construct(float $jumpRange, string $factionSymbol, array $connectedSystems)
@@ -33,7 +35,7 @@ class JumpGate implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param float $jumpRange
+     * @param  float $jumpRange
      * @return JumpGate
      */
     public function setJumpRange(float $jumpRange): JumpGate
@@ -51,7 +53,7 @@ class JumpGate implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $factionSymbol
+     * @param  string $factionSymbol
      * @return JumpGate
      */
     public function setFactionSymbol(string $factionSymbol): JumpGate
@@ -69,7 +71,7 @@ class JumpGate implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $connectedSystems
+     * @param  array $connectedSystems
      * @return JumpGate
      */
     public function setConnectedSystems(array $connectedSystems): JumpGate

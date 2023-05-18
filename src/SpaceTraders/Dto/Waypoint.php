@@ -8,19 +8,23 @@ use JsonSerializable;
 class Waypoint extends SystemWaypoint implements JsonSerializable, Deserializable
 {
     protected string $systemSymbol;
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     protected array $orbitals;
     protected string $faction;
-    /** @var WaypointTrait[] */
+    /**
+     * @var WaypointTrait[]
+     */
     protected array $traits;
     protected ?Chart $chart;
 
     /**
-     * @param string $systemSymbol
-     * @param string[] $orbitals
-     * @param string $faction
+     * @param string          $systemSymbol
+     * @param string[]        $orbitals
+     * @param string          $faction
      * @param WaypointTrait[] $traits
-     * @param Chart|null $chart
+     * @param Chart|null      $chart
      */
     public function __construct(
         string $systemSymbol,
@@ -45,7 +49,7 @@ class Waypoint extends SystemWaypoint implements JsonSerializable, Deserializabl
     }
 
     /**
-     * @param string $systemSymbol
+     * @param  string $systemSymbol
      * @return Waypoint
      */
     public function setSystemSymbol(string $systemSymbol): Waypoint
@@ -63,7 +67,7 @@ class Waypoint extends SystemWaypoint implements JsonSerializable, Deserializabl
     }
 
     /**
-     * @param array $orbitals
+     * @param  array $orbitals
      * @return Waypoint
      */
     public function setOrbitals(array $orbitals): Waypoint
@@ -81,7 +85,7 @@ class Waypoint extends SystemWaypoint implements JsonSerializable, Deserializabl
     }
 
     /**
-     * @param string $faction
+     * @param  string $faction
      * @return Waypoint
      */
     public function setFaction(string $faction): Waypoint
@@ -99,7 +103,7 @@ class Waypoint extends SystemWaypoint implements JsonSerializable, Deserializabl
     }
 
     /**
-     * @param array $traits
+     * @param  array $traits
      * @return Waypoint
      */
     public function setTraits(array $traits): Waypoint
@@ -117,7 +121,7 @@ class Waypoint extends SystemWaypoint implements JsonSerializable, Deserializabl
     }
 
     /**
-     * @param Chart|null $chart
+     * @param  Chart|null $chart
      * @return Waypoint
      */
     public function setChart(?Chart $chart): Waypoint

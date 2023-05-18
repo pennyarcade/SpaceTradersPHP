@@ -29,7 +29,7 @@ class ShipFuelConsumed implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $amount
+     * @param  int $amount
      * @return ShipFuelConsumed
      */
     public function setAmount(int $amount): ShipFuelConsumed
@@ -47,7 +47,7 @@ class ShipFuelConsumed implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $timestamp
+     * @param  int $timestamp
      * @return ShipFuelConsumed
      */
     public function setTimestamp(int $timestamp): ShipFuelConsumed

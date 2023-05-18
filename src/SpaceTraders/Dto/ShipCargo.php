@@ -9,12 +9,14 @@ class ShipCargo implements JsonSerializable, Deserializable
 {
     protected int $capacity;
     protected int $units;
-    /** @var ShipCargoItem[] */
+    /**
+     * @var ShipCargoItem[]
+     */
     protected array $inventory;
 
     /**
-     * @param int $capacity
-     * @param int $units
+     * @param int             $capacity
+     * @param int             $units
      * @param ShipCargoItem[] $inventory
      */
     public function __construct(int $capacity, int $units, array $inventory)
@@ -33,7 +35,7 @@ class ShipCargo implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $capacity
+     * @param  int $capacity
      * @return ShipCargo
      */
     public function setCapacity(int $capacity): ShipCargo
@@ -51,7 +53,7 @@ class ShipCargo implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $units
+     * @param  int $units
      * @return ShipCargo
      */
     public function setUnits(int $units): ShipCargo
@@ -69,7 +71,7 @@ class ShipCargo implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $inventory
+     * @param  array $inventory
      * @return ShipCargo
      */
     public function setInventory(array $inventory): ShipCargo

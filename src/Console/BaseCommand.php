@@ -26,6 +26,7 @@ abstract class BaseCommand extends Command
 
     /**
      * don't overwrite there should not be happening more in the constructor die to Command class quirks
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -35,9 +36,9 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * @param array $array
-     * @param array $badFields
-     * @param array $badValues
+     * @param  array $array
+     * @param  array $badFields
+     * @param  array $badValues
      * @return void
      */
     protected static function recursiveMultiUnset(array &$array, array $badFields, array $badValues = [])
@@ -65,9 +66,9 @@ abstract class BaseCommand extends Command
      * wrap execution part to structure command & facilitate convenience stuff
      * don't overwrite;
      *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
+     * @param                                         InputInterface  $input
+     * @param                                         OutputInterface $output
+     * @return                                        int
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -84,8 +85,8 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
      * @return void
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
@@ -104,6 +105,7 @@ abstract class BaseCommand extends Command
 
     /**
      * Initialize services here
+     *
      * @return void
      */
     protected function setUp(): void
@@ -113,6 +115,7 @@ abstract class BaseCommand extends Command
 
     /**
      * implement command here now
+     *
      * @return int
      */
     abstract protected function perform(): int;
@@ -120,6 +123,7 @@ abstract class BaseCommand extends Command
 
     /**
      * optionally implement stuff to teardown process
+     *
      * @return void
      */
     protected function tearDown(): void
@@ -129,7 +133,8 @@ abstract class BaseCommand extends Command
 
     /**
      * colors command output through the write(ln) method
-     * @param string $string
+     *
+     * @param  string $string
      * @return string
      */
     protected function errorTag(string $string): string
@@ -139,7 +144,8 @@ abstract class BaseCommand extends Command
 
     /**
      * colors command output through the write(ln) method
-     * @param string $string
+     *
+     * @param  string $string
      * @return string
      */
     protected function infoTag(string $string): string
@@ -149,7 +155,8 @@ abstract class BaseCommand extends Command
 
     /**
      * colors command output through the write(ln) method
-     * @param string $string
+     *
+     * @param  string $string
      * @return string
      */
     protected function commentTag(string $string): string
@@ -159,7 +166,8 @@ abstract class BaseCommand extends Command
 
     /**
      * colors command output through the write(ln) method
-     * @param string $string
+     *
+     * @param  string $string
      * @return string
      */
     protected function questionTag(string $string): string
@@ -203,7 +211,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * @param mixed $data
+     * @param  mixed $data
      * @return void
      */
     protected function debug(mixed $data): void
@@ -252,9 +260,10 @@ abstract class BaseCommand extends Command
 
     /**
      * real simple confirmation question considering verbosity settings
-     * @param string $question
-     * @param string|null $yesMsg
-     * @param string|null $noMsg
+     *
+     * @param  string      $question
+     * @param  string|null $yesMsg
+     * @param  string|null $noMsg
      * @return bool
      */
     protected function askConfirmation(
@@ -277,7 +286,7 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param  ResponseInterface $response
      * @return void
      */
     protected function prettyPrintProblemPlusJson(ResponseInterface $response): void

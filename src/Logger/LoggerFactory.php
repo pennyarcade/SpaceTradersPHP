@@ -20,6 +20,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Class LoggerFactory
  * create Monolog Logger instances
+ *
  * @package App\Infrastructure\Logger
  */
 class LoggerFactory
@@ -29,8 +30,9 @@ class LoggerFactory
 
     /**
      * LoggerFactory constructor.
-     * @param ContainerInterface $container
-     * @param bool $toConsole
+     *
+     * @param  ContainerInterface $container
+     * @param  bool               $toConsole
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -43,7 +45,7 @@ class LoggerFactory
     /**
      * guarantee the same log structure regardless of attached streams/handlers
      *
-     * @param string|null $name
+     * @param  string|null $name
      * @return Logger
      */
     private function getHandlelessLogger(?string $name = null): Logger
@@ -55,9 +57,9 @@ class LoggerFactory
     /**
      * Create file loggers with custom or default settings
      *
-     * @param string|null $name
-     * @param string|null $path
-     * @param string|int|null $level
+     * @param  string|null     $name
+     * @param  string|null     $path
+     * @param  string|int|null $level
      * @return Logger
      */
     public function getFileLogger(?string $name = null, ?string $path = null, $level = null): Logger
@@ -92,9 +94,9 @@ class LoggerFactory
      *
      * @param string|null $name
      * @param string|null $path
-     * @param int|null $minLogLevel
+     * @param int|null    $minLogLevel
      *
-     * @param bool $toConsole
+     * @param  bool        $toConsole
      * @return Logger
      */
     public function getRotatingFileLogger(
@@ -114,7 +116,9 @@ class LoggerFactory
         $log->pushHandler($logRotationHandler);
         if ($toConsole || $this->logToConsole) {
             $minLogLevel = $this->getLogLevelByEnvironmentVerbosity();
-            $log->pushHandler( /** @phpstan-ignore-next-line */
+            $log->pushHandler( /**
+ * @phpstan-ignore-next-line
+*/
                 new StreamHandler('php://stdout', $minLogLevel ?? $this->settings['level'])
             );
         }
@@ -148,6 +152,7 @@ class LoggerFactory
     /**
      * Return logger with default settings.
      * this function only exists to make it explicit though naming.
+     *
      * @return Logger
      */
     public function getDefaultLogger(): Logger
@@ -158,7 +163,8 @@ class LoggerFactory
     /**
      * Return logger with default settings.
      * this function only exists to make it explicit though naming.
-     * @param int|null $logLevel
+     *
+     * @param  int|null $logLevel
      * @return Logger
      */
     public function getConsoleLogger(?int $logLevel = null): Logger
@@ -167,7 +173,7 @@ class LoggerFactory
     }
 
     /**
-     * @see: app/bootstrap.php
+     * @see:   app/bootstrap.php
      * @return int
      */
     public static function getLogLevelByEnvironmentVerbosity(): int

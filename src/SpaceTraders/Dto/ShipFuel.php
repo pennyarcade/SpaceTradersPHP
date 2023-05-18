@@ -12,8 +12,8 @@ class ShipFuel implements JsonSerializable, Deserializable
     protected ShipFuelConsumed $consumed;
 
     /**
-     * @param int $current
-     * @param int $capacity
+     * @param int                   $current
+     * @param int                   $capacity
      * @param ShipFuelConsumed|null $consumed
      */
     public function __construct(
@@ -35,7 +35,7 @@ class ShipFuel implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $current
+     * @param  int $current
      * @return ShipFuel
      */
     public function setCurrent(int $current): ShipFuel
@@ -53,7 +53,7 @@ class ShipFuel implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $capacity
+     * @param  int $capacity
      * @return ShipFuel
      */
     public function setCapacity(int $capacity): ShipFuel
@@ -71,7 +71,7 @@ class ShipFuel implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipFuelConsumed $consumed
+     * @param  ShipFuelConsumed $consumed
      * @return ShipFuel
      */
     public function setConsumed(ShipFuelConsumed $consumed): ShipFuel

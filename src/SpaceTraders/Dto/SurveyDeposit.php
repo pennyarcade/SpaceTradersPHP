@@ -25,7 +25,7 @@ class SurveyDeposit implements JsonSerializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return SurveyDeposit
      */
     public function setSymbol(string $symbol): SurveyDeposit

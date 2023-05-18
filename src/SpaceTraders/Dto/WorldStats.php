@@ -1,4 +1,5 @@
 <?php
+
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
@@ -34,7 +35,7 @@ class WorldStats implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $agents
+     * @param  int $agents
      * @return WorldStats
      */
     public function setAgents(int $agents): WorldStats
@@ -52,7 +53,7 @@ class WorldStats implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $ships
+     * @param  int $ships
      * @return WorldStats
      */
     public function setShips(int $ships): WorldStats
@@ -70,7 +71,7 @@ class WorldStats implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $systems
+     * @param  int $systems
      * @return WorldStats
      */
     public function setSystems(int $systems): WorldStats
@@ -88,7 +89,7 @@ class WorldStats implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $waypoints
+     * @param  int $waypoints
      * @return WorldStats
      */
     public function setWaypoints(int $waypoints): WorldStats

@@ -15,25 +15,29 @@ class Ship implements JsonSerializable, Deserializable
     protected ShipFrame $frame;
     protected ShipReactor $reactor;
     protected ShipEngine $engine;
-    /** @var ShipModule[] $modules */
+    /**
+     * @var ShipModule[] $modules
+     */
     protected array $modules;
-    /** @var ShipMount[] $mounts */
+    /**
+     * @var ShipMount[] $mounts
+     */
     protected array $mounts;
     protected ShipCargo $cargo;
     protected ShipFuel $fuel;
 
     /**
-     * @param string $symbol
+     * @param string           $symbol
      * @param ShipRegistration $registration
-     * @param ShipNav $nav
-     * @param ShipCrew $crew
-     * @param ShipFrame $frame
-     * @param ShipReactor $reactor
-     * @param ShipEngine $engine
-     * @param ShipModule[] $modules
-     * @param ShipMount[] $mounts
-     * @param ShipCargo $cargo
-     * @param ShipFuel $fuel
+     * @param ShipNav          $nav
+     * @param ShipCrew         $crew
+     * @param ShipFrame        $frame
+     * @param ShipReactor      $reactor
+     * @param ShipEngine       $engine
+     * @param ShipModule[]     $modules
+     * @param ShipMount[]      $mounts
+     * @param ShipCargo        $cargo
+     * @param ShipFuel         $fuel
      */
     public function __construct(
         string $symbol,
@@ -70,7 +74,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return Ship
      */
     public function setSymbol(string $symbol): Ship
@@ -88,7 +92,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipRegistration $registration
+     * @param  ShipRegistration $registration
      * @return Ship
      */
     public function setRegistration(ShipRegistration $registration): Ship
@@ -106,7 +110,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipNav $nav
+     * @param  ShipNav $nav
      * @return Ship
      */
     public function setNav(ShipNav $nav): Ship
@@ -124,7 +128,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipCrew $crew
+     * @param  ShipCrew $crew
      * @return Ship
      */
     public function setCrew(ShipCrew $crew): Ship
@@ -142,7 +146,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipFrame $frame
+     * @param  ShipFrame $frame
      * @return Ship
      */
     public function setFrame(ShipFrame $frame): Ship
@@ -160,7 +164,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipReactor $reactor
+     * @param  ShipReactor $reactor
      * @return Ship
      */
     public function setReactor(ShipReactor $reactor): Ship
@@ -178,7 +182,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipEngine $engine
+     * @param  ShipEngine $engine
      * @return Ship
      */
     public function setEngine(ShipEngine $engine): Ship
@@ -196,7 +200,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $modules
+     * @param  array $modules
      * @return Ship
      */
     public function setModules(array $modules): Ship
@@ -214,7 +218,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $mounts
+     * @param  array $mounts
      * @return Ship
      */
     public function setMounts(array $mounts): Ship
@@ -232,7 +236,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipCargo $cargo
+     * @param  ShipCargo $cargo
      * @return Ship
      */
     public function setCargo(ShipCargo $cargo): Ship
@@ -250,7 +254,7 @@ class Ship implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipFuel $fuel
+     * @param  ShipFuel $fuel
      * @return Ship
      */
     public function setFuel(ShipFuel $fuel): Ship

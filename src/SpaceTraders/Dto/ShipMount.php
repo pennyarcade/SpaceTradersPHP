@@ -13,17 +13,19 @@ class ShipMount implements JsonSerializable, Deserializable
     protected string $name;
     protected string $description;
     protected int    $strength;
-    /** @var DepositType[] $deposits */
+    /**
+     * @var DepositType[] $deposits
+     */
     protected array  $deposits;
     protected ShipRequirements $requirements;
 
     /**
      * @param ShipMountSymbolType $symbol
-     * @param string $name
-     * @param string $description
-     * @param int $strength
-     * @param DepositType[] $deposits
-     * @param ShipRequirements $requirements
+     * @param string              $name
+     * @param string              $description
+     * @param int                 $strength
+     * @param DepositType[]       $deposits
+     * @param ShipRequirements    $requirements
      */
     public function __construct(
         ShipMountSymbolType $symbol,
@@ -50,7 +52,7 @@ class ShipMount implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipMountSymbolType $symbol
+     * @param  ShipMountSymbolType $symbol
      * @return ShipMount
      */
     public function setSymbol(ShipMountSymbolType $symbol): ShipMount
@@ -68,7 +70,7 @@ class ShipMount implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return ShipMount
      */
     public function setName(string $name): ShipMount
@@ -86,7 +88,7 @@ class ShipMount implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return ShipMount
      */
     public function setDescription(string $description): ShipMount
@@ -104,7 +106,7 @@ class ShipMount implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $strength
+     * @param  int $strength
      * @return ShipMount
      */
     public function setStrength(int $strength): ShipMount
@@ -122,7 +124,7 @@ class ShipMount implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $deposits
+     * @param  array $deposits
      * @return ShipMount
      */
     public function setDeposits(array $deposits): ShipMount
@@ -140,7 +142,7 @@ class ShipMount implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipRequirements $requirements
+     * @param  ShipRequirements $requirements
      * @return ShipMount
      */
     public function setRequirements(ShipRequirements $requirements): ShipMount

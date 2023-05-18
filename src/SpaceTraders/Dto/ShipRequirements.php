@@ -32,7 +32,7 @@ class ShipRequirements implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $power
+     * @param  int $power
      * @return ShipRequirements
      */
     public function setPower(int $power): ShipRequirements
@@ -50,7 +50,7 @@ class ShipRequirements implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $crew
+     * @param  int $crew
      * @return ShipRequirements
      */
     public function setCrew(int $crew): ShipRequirements
@@ -68,7 +68,7 @@ class ShipRequirements implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $slots
+     * @param  int $slots
      * @return ShipRequirements
      */
     public function setSlots(int $slots): ShipRequirements

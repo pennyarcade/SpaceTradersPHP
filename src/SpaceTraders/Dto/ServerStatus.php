@@ -9,19 +9,27 @@ class ServerStatus implements JsonSerializable, Deserializable
 {
     protected string $status;
     protected WorldStats $stats;
-    /** @var LeaderboadEntry[] $mostCreditsLeaderboard */
+    /**
+     * @var LeaderboadEntry[] $mostCreditsLeaderboard
+     */
     protected array $mostCreditsLeaderboard;
-    /** @var LeaderboadEntry[] $mostSubmittedChartsLeaderboard */
+    /**
+     * @var LeaderboadEntry[] $mostSubmittedChartsLeaderboard
+     */
     protected array $mostSubmittedChartsLeaderboard;
 
     /**
-     * @param string $status
-     * @param WorldStats $stats
+     * @param string            $status
+     * @param WorldStats        $stats
      * @param LeaderboadEntry[] $mostCreditsLeaderboard
      * @param LeaderboadEntry[] $mostSubmittedChartsLeaderboard
      */
-    public function __construct(string $status, WorldStats $stats, array $mostCreditsLeaderboard, array $mostSubmittedChartsLeaderboard)
-    {
+    public function __construct(
+        string $status,
+        WorldStats $stats,
+        array $mostCreditsLeaderboard,
+        array $mostSubmittedChartsLeaderboard
+    ) {
         $this->status = $status;
         $this->stats = $stats;
         $this->mostCreditsLeaderboard = $mostCreditsLeaderboard;
@@ -37,7 +45,7 @@ class ServerStatus implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $status
+     * @param  string $status
      * @return ServerStatus
      */
     public function setStatus(string $status): ServerStatus
@@ -55,7 +63,7 @@ class ServerStatus implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param WorldStats $stats
+     * @param  WorldStats $stats
      * @return ServerStatus
      */
     public function setStats(WorldStats $stats): ServerStatus
@@ -73,7 +81,7 @@ class ServerStatus implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $mostCreditsLeaderboard
+     * @param  array $mostCreditsLeaderboard
      * @return ServerStatus
      */
     public function setMostCreditsLeaderboard(array $mostCreditsLeaderboard): ServerStatus
@@ -91,7 +99,7 @@ class ServerStatus implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $mostSubmittedChartsLeaderboard
+     * @param  array $mostSubmittedChartsLeaderboard
      * @return ServerStatus
      */
     public function setMostSubmittedChartsLeaderboard(array $mostSubmittedChartsLeaderboard): ServerStatus

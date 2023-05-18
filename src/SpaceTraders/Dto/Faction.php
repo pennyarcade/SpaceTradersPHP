@@ -11,14 +11,16 @@ class Faction implements JsonSerializable, Deserializable
     protected string $name;
     protected string $description;
     protected string $headquarters;
-    /** @var FactionTrait[] $traits */
+    /**
+     * @var FactionTrait[] $traits
+     */
     protected array $traits;
 
     /**
-     * @param string $symbol
-     * @param string $name
-     * @param string $description
-     * @param string $headquarters
+     * @param string         $symbol
+     * @param string         $name
+     * @param string         $description
+     * @param string         $headquarters
      * @param FactionTrait[] $traits
      */
     public function __construct(string $symbol, string $name, string $description, string $headquarters, array $traits)
@@ -44,7 +46,7 @@ class Faction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return Faction
      */
     public function setSymbol(string $symbol): Faction
@@ -62,7 +64,7 @@ class Faction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return Faction
      */
     public function setName(string $name): Faction
@@ -80,7 +82,7 @@ class Faction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return Faction
      */
     public function setDescription(string $description): Faction
@@ -98,7 +100,7 @@ class Faction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $headquarters
+     * @param  string $headquarters
      * @return Faction
      */
     public function setHeadquarters(string $headquarters): Faction
@@ -116,7 +118,7 @@ class Faction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $traits
+     * @param  array $traits
      * @return Faction
      */
     public function setTraits(array $traits): Faction

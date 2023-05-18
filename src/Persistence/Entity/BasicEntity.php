@@ -28,7 +28,7 @@ class BasicEntity
     }
 
     /**
-     * @param int $id
+     * @param  int $id
      * @return Agent
      */
     public function setId(int $id): Agent
@@ -46,7 +46,7 @@ class BasicEntity
     }
 
     /**
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return BasicEntity
      */
     public function setCreated(\DateTime $created): BasicEntity
@@ -64,7 +64,7 @@ class BasicEntity
     }
 
     /**
-     * @param \DateTime $changed
+     * @param  \DateTime $changed
      * @return BasicEntity
      */
     public function setChanged(\DateTime $changed): BasicEntity
@@ -82,7 +82,7 @@ class BasicEntity
     }
 
     /**
-     * @param \DateTime|null $expires
+     * @param  \DateTime|null $expires
      * @return BasicEntity
      */
     public function setExpires(?\DateTime $expires): BasicEntity

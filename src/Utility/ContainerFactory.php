@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Copyright (c) 2023 Martin Toennishoff
  */
+
 namespace App\Utility;
 
 use App\Logger\LoggerFactory;
@@ -22,7 +24,7 @@ class ContainerFactory
     private static bool $logToConsole = false;
 
     /**
-     * @param bool $logToConsole
+     * @param  bool $logToConsole
      * @return void
      */
     public static function setLogToConsole(bool $logToConsole): void
@@ -63,7 +65,7 @@ class ContainerFactory
     /**
      * Add LoggerFactory and other factories/services
      *
-     * @param PsrCompatibleContainer $container
+     * @param                                 PsrCompatibleContainer $container
      * @suppressWarnings(PHPMD.ShortVariable)
      */
     private static function addDependencies(PsrCompatibleContainer $container): void
@@ -73,5 +75,4 @@ class ContainerFactory
             fn (PsrCompatibleContainer $c) => $c->offsetGet(LoggerFactory::class)->getDefaultLogger();
         $container[EntityManagerFactory::class] = fn (PsrCompatibleContainer $c) => new EntityManagerFactory($c);
     }
-
 }

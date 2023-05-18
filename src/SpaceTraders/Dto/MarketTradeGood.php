@@ -15,11 +15,11 @@ class MarketTradeGood implements JsonSerializable, Deserializable
     protected int    $sellPrice;
 
     /**
-     * @param string $symbol
-     * @param int $tradeVolume
+     * @param string     $symbol
+     * @param int        $tradeVolume
      * @param SupplyType $supply
-     * @param int $purchasePrice
-     * @param int $sellPrice
+     * @param int        $purchasePrice
+     * @param int        $sellPrice
      */
     public function __construct(
         string $symbol,
@@ -44,7 +44,7 @@ class MarketTradeGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return MarketTradeGood
      */
     public function setSymbol(string $symbol): MarketTradeGood
@@ -62,7 +62,7 @@ class MarketTradeGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $tradeVolume
+     * @param  int $tradeVolume
      * @return MarketTradeGood
      */
     public function setTradeVolume(int $tradeVolume): MarketTradeGood
@@ -80,7 +80,7 @@ class MarketTradeGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param SupplyType $supply
+     * @param  SupplyType $supply
      * @return MarketTradeGood
      */
     public function setSupply(SupplyType $supply): MarketTradeGood
@@ -98,7 +98,7 @@ class MarketTradeGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $purchasePrice
+     * @param  int $purchasePrice
      * @return MarketTradeGood
      */
     public function setPurchasePrice(int $purchasePrice): MarketTradeGood
@@ -116,7 +116,7 @@ class MarketTradeGood implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $sellPrice
+     * @param  int $sellPrice
      * @return MarketTradeGood
      */
     public function setSellPrice(int $sellPrice): MarketTradeGood

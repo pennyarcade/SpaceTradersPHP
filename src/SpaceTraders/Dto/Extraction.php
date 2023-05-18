@@ -11,7 +11,7 @@ class Extraction implements JsonSerializable, Deserializable
     protected ExtractionYield $yield;
 
     /**
-     * @param string $shipSymbol
+     * @param string          $shipSymbol
      * @param ExtractionYield $yield
      */
     public function __construct(string $shipSymbol, ExtractionYield $yield)
@@ -29,7 +29,7 @@ class Extraction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $shipSymbol
+     * @param  string $shipSymbol
      * @return Extraction
      */
     public function setShipSymbol(string $shipSymbol): Extraction
@@ -47,7 +47,7 @@ class Extraction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ExtractionYield $yield
+     * @param  ExtractionYield $yield
      * @return Extraction
      */
     public function setYield(ExtractionYield $yield): Extraction

@@ -16,10 +16,10 @@ class ShipNav implements JsonSerializable, Deserializable
     protected ShipNavFlightMode $flightMode;
 
     /**
-     * @param string $systemSymbol
-     * @param string $waypointSymbol
-     * @param ShipNavRoute $route
-     * @param ShipNavStatus $status
+     * @param string            $systemSymbol
+     * @param string            $waypointSymbol
+     * @param ShipNavRoute      $route
+     * @param ShipNavStatus     $status
      * @param ShipNavFlightMode $flightMode
      */
     public function __construct(

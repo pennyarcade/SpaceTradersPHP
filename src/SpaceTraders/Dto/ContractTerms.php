@@ -10,12 +10,14 @@ class ContractTerms implements JsonSerializable, Deserializable
 {
     protected DateTime $deadline;
     protected ContractPayment $payment;
-    /** @var ContractDeliverGood[] $deliver */
+    /**
+     * @var ContractDeliverGood[] $deliver
+     */
     protected array $deliver;
 
     /**
-     * @param DateTime $deadline
-     * @param ContractPayment $payment
+     * @param DateTime              $deadline
+     * @param ContractPayment       $payment
      * @param ContractDeliverGood[] $deliver
      */
     public function __construct(DateTime $deadline, ContractPayment $payment, array $deliver)
@@ -34,7 +36,7 @@ class ContractTerms implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param DateTime $deadline
+     * @param  DateTime $deadline
      * @return ContractTerms
      */
     public function setDeadline(DateTime $deadline): ContractTerms
@@ -52,7 +54,7 @@ class ContractTerms implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ContractPayment $payment
+     * @param  ContractPayment $payment
      * @return ContractTerms
      */
     public function setPayment(ContractPayment $payment): ContractTerms
@@ -70,7 +72,7 @@ class ContractTerms implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $deliver
+     * @param  array $deliver
      * @return ContractTerms
      */
     public function setDeliver(array $deliver): ContractTerms

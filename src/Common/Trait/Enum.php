@@ -10,7 +10,9 @@ trait Enum
     {
         $cases = static::casesWithName($name);
         if (empty($cases)) {
-            throw new InvalidArgumentException("Invalid case " . $name . " for enum " . array_reverse(explode('\\', static::class))[0]);
+            throw new InvalidArgumentException(
+                "Invalid case " . $name . " for enum " . array_reverse(explode('\\', static::class))[0]
+            );
         }
          return array_values($cases)[0];
     }
@@ -25,8 +27,11 @@ trait Enum
      */
     protected static function casesWithName(string $name): array
     {
-        return array_filter(static::cases(), function (self $item) use ($name) {
-            return $item->name == $name;
-        });
+        return array_filter(
+            static::cases(),
+            function (self $item) use ($name) {
+                return $item->name == $name;
+            }
+        );
     }
 }

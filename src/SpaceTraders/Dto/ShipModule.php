@@ -17,11 +17,11 @@ class ShipModule implements JsonSerializable, Deserializable
 
     /**
      * @param ShipModuleSymbolType $symbol
-     * @param int $capacity
-     * @param int $range
-     * @param string $name
-     * @param string $description
-     * @param ShipRequirements $requirements
+     * @param int                  $capacity
+     * @param int                  $range
+     * @param string               $name
+     * @param string               $description
+     * @param ShipRequirements     $requirements
      */
     public function __construct(
         ShipModuleSymbolType $symbol,
@@ -48,7 +48,7 @@ class ShipModule implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipModuleSymbolType $symbol
+     * @param  ShipModuleSymbolType $symbol
      * @return ShipModule
      */
     public function setSymbol(ShipModuleSymbolType $symbol): ShipModule
@@ -66,7 +66,7 @@ class ShipModule implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $capacity
+     * @param  int $capacity
      * @return ShipModule
      */
     public function setCapacity(int $capacity): ShipModule
@@ -84,7 +84,7 @@ class ShipModule implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $range
+     * @param  int $range
      * @return ShipModule
      */
     public function setRange(int $range): ShipModule
@@ -102,7 +102,7 @@ class ShipModule implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return ShipModule
      */
     public function setName(string $name): ShipModule
@@ -120,7 +120,7 @@ class ShipModule implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return ShipModule
      */
     public function setDescription(string $description): ShipModule
@@ -138,7 +138,7 @@ class ShipModule implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipRequirements $requirements
+     * @param  ShipRequirements $requirements
      * @return ShipModule
      */
     public function setRequirements(ShipRequirements $requirements): ShipModule

@@ -16,7 +16,7 @@ class ShipCargoItem implements JsonSerializable, Deserializable
      * @param string $symbol
      * @param string $name
      * @param string $description
-     * @param int $units
+     * @param int    $units
      */
     public function __construct(string $symbol, string $name, string $description, int $units)
     {
@@ -35,7 +35,7 @@ class ShipCargoItem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return ShipCargoItem
      */
     public function setSymbol(string $symbol): ShipCargoItem
@@ -53,7 +53,7 @@ class ShipCargoItem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return ShipCargoItem
      */
     public function setName(string $name): ShipCargoItem
@@ -71,7 +71,7 @@ class ShipCargoItem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return ShipCargoItem
      */
     public function setDescription(string $description): ShipCargoItem
@@ -89,7 +89,7 @@ class ShipCargoItem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $units
+     * @param  int $units
      * @return ShipCargoItem
      */
     public function setUnits(int $units): ShipCargoItem

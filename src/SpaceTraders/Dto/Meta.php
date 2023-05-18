@@ -32,7 +32,7 @@ class Meta implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $total
+     * @param  int $total
      * @return Meta
      */
     public function setTotal(int $total): Meta
@@ -50,7 +50,7 @@ class Meta implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $page
+     * @param  int $page
      * @return Meta
      */
     public function setPage(int $page): Meta
@@ -68,7 +68,7 @@ class Meta implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $limit
+     * @param  int $limit
      * @return Meta
      */
     public function setLimit(int $limit): Meta

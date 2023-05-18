@@ -12,7 +12,7 @@ class ExtractionYield implements JsonSerializable, Deserializable
 
     /**
      * @param string $symbol
-     * @param int $units
+     * @param int    $units
      */
     public function __construct(string $symbol, int $units)
     {
@@ -29,7 +29,7 @@ class ExtractionYield implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return ExtractionYield
      */
     public function setSymbol(string $symbol): ExtractionYield
@@ -47,7 +47,7 @@ class ExtractionYield implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $units
+     * @param  int $units
      * @return ExtractionYield
      */
     public function setUnits(int $units): ExtractionYield

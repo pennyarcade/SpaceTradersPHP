@@ -8,27 +8,43 @@ use JsonSerializable;
 class Market implements JsonSerializable, Deserializable
 {
     protected string $symbol;
-    /** @var MarketTradeGood[] $exports  */
+    /**
+     * @var MarketTradeGood[] $exports
+     */
     protected array $exports;
-    /** @var MarketTradeGood[] $imports  */
+    /**
+     * @var MarketTradeGood[] $imports
+     */
     protected array $imports;
-    /** @var MarketTradeGood[] $exchange  */
+    /**
+     * @var MarketTradeGood[] $exchange
+     */
     protected array $exchange;
-    /** @var MarketTransaction[] $transactions  */
+    /**
+     * @var MarketTransaction[] $transactions
+     */
     protected array $transactions;
-    /** @var MarketTradeGood[] $tradeGoods  */
+    /**
+     * @var MarketTradeGood[] $tradeGoods
+     */
     protected array $tradeGoods;
 
     /**
-     * @param string $symbol
-     * @param MarketTradeGood[] $exports
-     * @param MarketTradeGood[] $imports
-     * @param MarketTradeGood[] $exchange
+     * @param string              $symbol
+     * @param MarketTradeGood[]   $exports
+     * @param MarketTradeGood[]   $imports
+     * @param MarketTradeGood[]   $exchange
      * @param MarketTransaction[] $transactions
-     * @param MarketTradeGood[] $tradeGoods
+     * @param MarketTradeGood[]   $tradeGoods
      */
-    public function __construct(string $symbol, array $exports, array $imports, array $exchange, array $transactions, array $tradeGoods)
-    {
+    public function __construct(
+        string $symbol,
+        array $exports,
+        array $imports,
+        array $exchange,
+        array $transactions,
+        array $tradeGoods
+    ) {
         $this->symbol = $symbol;
         $this->exports = $exports;
         $this->imports = $imports;
@@ -46,7 +62,7 @@ class Market implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return Market
      */
     public function setSymbol(string $symbol): Market
@@ -64,7 +80,7 @@ class Market implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $exports
+     * @param  array $exports
      * @return Market
      */
     public function setExports(array $exports): Market
@@ -82,7 +98,7 @@ class Market implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $imports
+     * @param  array $imports
      * @return Market
      */
     public function setImports(array $imports): Market
@@ -100,7 +116,7 @@ class Market implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $exchange
+     * @param  array $exchange
      * @return Market
      */
     public function setExchange(array $exchange): Market
@@ -118,7 +134,7 @@ class Market implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $transactions
+     * @param  array $transactions
      * @return Market
      */
     public function setTransactions(array $transactions): Market
@@ -136,7 +152,7 @@ class Market implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $tradeGoods
+     * @param  array $tradeGoods
      * @return Market
      */
     public function setTradeGoods(array $tradeGoods): Market

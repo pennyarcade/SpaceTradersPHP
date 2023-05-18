@@ -10,23 +10,27 @@ use JsonSerializable;
 class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deserializable
 {
     protected string $systemSymbol;
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     protected array $orbitals;
     protected string $faction;
-    /** @var WaypointTrait[] */
+    /**
+     * @var WaypointTrait[]
+     */
     protected array $traits;
     protected ?Chart $chart;
 
     /**
-     * @param string $symbol
-     * @param WaypointType $type
-     * @param string $systemSymbol
-     * @param int $x
-     * @param int $y
-     * @param string[] $orbitals
-     * @param string $faction
+     * @param string          $symbol
+     * @param WaypointType    $type
+     * @param string          $systemSymbol
+     * @param int             $x
+     * @param int             $y
+     * @param string[]        $orbitals
+     * @param string          $faction
      * @param WaypointTrait[] $traits
-     * @param Chart|null $chart
+     * @param Chart|null      $chart
      */
     public function __construct(
         string $symbol,
@@ -59,7 +63,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return ScannedWaypoint
      */
     public function setSymbol(string $symbol): ScannedWaypoint
@@ -77,7 +81,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param WaypointType $type
+     * @param  WaypointType $type
      * @return ScannedWaypoint
      */
     public function setType(WaypointType $type): ScannedWaypoint
@@ -95,7 +99,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param string $systemSymbol
+     * @param  string $systemSymbol
      * @return ScannedWaypoint
      */
     public function setSystemSymbol(string $systemSymbol): ScannedWaypoint
@@ -113,7 +117,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param int $x
+     * @param  int $x
      * @return ScannedWaypoint
      */
     public function setX(int $x): ScannedWaypoint
@@ -131,7 +135,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param int $y
+     * @param  int $y
      * @return ScannedWaypoint
      */
     public function setY(int $y): ScannedWaypoint
@@ -149,7 +153,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param array $orbitals
+     * @param  array $orbitals
      * @return ScannedWaypoint
      */
     public function setOrbitals(array $orbitals): ScannedWaypoint
@@ -167,7 +171,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param string $faction
+     * @param  string $faction
      * @return ScannedWaypoint
      */
     public function setFaction(string $faction): ScannedWaypoint
@@ -185,7 +189,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param array $traits
+     * @param  array $traits
      * @return ScannedWaypoint
      */
     public function setTraits(array $traits): ScannedWaypoint
@@ -203,7 +207,7 @@ class ScannedWaypoint extends SystemWaypoint implements JsonSerializable, Deseri
     }
 
     /**
-     * @param Chart|null $chart
+     * @param  Chart|null $chart
      * @return ScannedWaypoint
      */
     public function setChart(?Chart $chart): ScannedWaypoint

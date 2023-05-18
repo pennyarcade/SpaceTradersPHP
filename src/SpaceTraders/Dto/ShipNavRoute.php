@@ -16,8 +16,8 @@ class ShipNavRoute implements JsonSerializable, Deserializable
     /**
      * @param ShipNavRouteWaypoint $destination
      * @param ShipNavRouteWaypoint $departure
-     * @param DateTime $departureTime
-     * @param DateTime $arrival
+     * @param DateTime             $departureTime
+     * @param DateTime             $arrival
      */
     public function __construct(
         ShipNavRouteWaypoint $destination,
@@ -40,7 +40,7 @@ class ShipNavRoute implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipNavRouteWaypoint $destination
+     * @param  ShipNavRouteWaypoint $destination
      * @return ShipNavRoute
      */
     public function setDestination(ShipNavRouteWaypoint $destination): ShipNavRoute
@@ -58,7 +58,7 @@ class ShipNavRoute implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipNavRouteWaypoint $departure
+     * @param  ShipNavRouteWaypoint $departure
      * @return ShipNavRoute
      */
     public function setDeparture(ShipNavRouteWaypoint $departure): ShipNavRoute
@@ -76,7 +76,7 @@ class ShipNavRoute implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param DateTime $departureTime
+     * @param  DateTime $departureTime
      * @return ShipNavRoute
      */
     public function setDepartureTime(DateTime $departureTime): ShipNavRoute
@@ -94,7 +94,7 @@ class ShipNavRoute implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param DateTime $arrival
+     * @param  DateTime $arrival
      * @return ShipNavRoute
      */
     public function setArrival(DateTime $arrival): ShipNavRoute

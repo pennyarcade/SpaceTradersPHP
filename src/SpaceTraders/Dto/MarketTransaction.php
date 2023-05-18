@@ -19,17 +19,25 @@ class MarketTransaction implements JsonSerializable, Deserializable
     protected DateTime $timestamp;
 
     /**
-     * @param string $waypointSymbol
-     * @param string $shipSymbol
-     * @param string $tradeSymbol
+     * @param string                $waypointSymbol
+     * @param string                $shipSymbol
+     * @param string                $tradeSymbol
      * @param MarketTransactionType $type
-     * @param int $units
-     * @param int $pricePerUnit
-     * @param int $totalPrice
-     * @param DateTime $timestamp
+     * @param int                   $units
+     * @param int                   $pricePerUnit
+     * @param int                   $totalPrice
+     * @param DateTime              $timestamp
      */
-    public function __construct(string $waypointSymbol, string $shipSymbol, string $tradeSymbol, MarketTransactionType $type, int $units, int $pricePerUnit, int $totalPrice, DateTime $timestamp)
-    {
+    public function __construct(
+        string $waypointSymbol,
+        string $shipSymbol,
+        string $tradeSymbol,
+        MarketTransactionType $type,
+        int $units,
+        int $pricePerUnit,
+        int $totalPrice,
+        DateTime $timestamp
+    ) {
         $this->waypointSymbol = $waypointSymbol;
         $this->shipSymbol = $shipSymbol;
         $this->tradeSymbol = $tradeSymbol;
@@ -49,7 +57,7 @@ class MarketTransaction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $waypointSymbol
+     * @param  string $waypointSymbol
      * @return MarketTransaction
      */
     public function setWaypointSymbol(string $waypointSymbol): MarketTransaction
@@ -67,7 +75,7 @@ class MarketTransaction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $shipSymbol
+     * @param  string $shipSymbol
      * @return MarketTransaction
      */
     public function setShipSymbol(string $shipSymbol): MarketTransaction
@@ -85,7 +93,7 @@ class MarketTransaction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $tradeSymbol
+     * @param  string $tradeSymbol
      * @return MarketTransaction
      */
     public function setTradeSymbol(string $tradeSymbol): MarketTransaction
@@ -103,7 +111,7 @@ class MarketTransaction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param MarketTransactionType $type
+     * @param  MarketTransactionType $type
      * @return MarketTransaction
      */
     public function setType(MarketTransactionType $type): MarketTransaction
@@ -121,7 +129,7 @@ class MarketTransaction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $units
+     * @param  int $units
      * @return MarketTransaction
      */
     public function setUnits(int $units): MarketTransaction
@@ -139,7 +147,7 @@ class MarketTransaction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $pricePerUnit
+     * @param  int $pricePerUnit
      * @return MarketTransaction
      */
     public function setPricePerUnit(int $pricePerUnit): MarketTransaction
@@ -157,7 +165,7 @@ class MarketTransaction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $totalPrice
+     * @param  int $totalPrice
      * @return MarketTransaction
      */
     public function setTotalPrice(int $totalPrice): MarketTransaction
@@ -175,7 +183,7 @@ class MarketTransaction implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param DateTime $timestamp
+     * @param  DateTime $timestamp
      * @return MarketTransaction
      */
     public function setTimestamp(DateTime $timestamp): MarketTransaction

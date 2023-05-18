@@ -20,8 +20,7 @@ class ServerStatus extends BaseCommand
             ->setDescription('Get server status')
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('Get server status')
-        ;
+            ->setHelp('Get server status');
     }
 
     /**
@@ -35,7 +34,7 @@ class ServerStatus extends BaseCommand
 
     /**
      * @inheritDoc
-     * @throws GuzzleException
+     * @throws     GuzzleException
      */
     protected function perform(): int
     {

@@ -14,11 +14,11 @@ class ShipNavRouteWaypoint implements JsonSerializable, Deserializable
     protected int    $y;
 
     /**
-     * @param string $symbol
+     * @param string       $symbol
      * @param WaypointType $type
-     * @param string $systemSymbol
-     * @param int $x
-     * @param int $y
+     * @param string       $systemSymbol
+     * @param int          $x
+     * @param int          $y
      */
     public function __construct(string $symbol, WaypointType $type, string $systemSymbol, int $x, int $y)
     {
@@ -38,7 +38,7 @@ class ShipNavRouteWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return ShipNavRouteWaypoint
      */
     public function setSymbol(string $symbol): ShipNavRouteWaypoint
@@ -56,7 +56,7 @@ class ShipNavRouteWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param WaypointType $type
+     * @param  WaypointType $type
      * @return ShipNavRouteWaypoint
      */
     public function setType(WaypointType $type): ShipNavRouteWaypoint
@@ -74,7 +74,7 @@ class ShipNavRouteWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $systemSymbol
+     * @param  string $systemSymbol
      * @return ShipNavRouteWaypoint
      */
     public function setSystemSymbol(string $systemSymbol): ShipNavRouteWaypoint
@@ -92,7 +92,7 @@ class ShipNavRouteWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $x
+     * @param  int $x
      * @return ShipNavRouteWaypoint
      */
     public function setX(int $x): ShipNavRouteWaypoint
@@ -110,7 +110,7 @@ class ShipNavRouteWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $y
+     * @param  int $y
      * @return ShipNavRouteWaypoint
      */
     public function setY(int $y): ShipNavRouteWaypoint

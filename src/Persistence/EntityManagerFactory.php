@@ -17,7 +17,7 @@ class EntityManagerFactory
     private array $config;
 
     /**
-     * @param PsrCompatibleContainer $c
+     * @param  PsrCompatibleContainer $c
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -43,10 +43,13 @@ class EntityManagerFactory
         );
 
         // configuring the database connection
-        $connection = DriverManager::getConnection([
+        $connection = DriverManager::getConnection(
+            [
             'driver' => 'pdo_sqlite',
             'path' => $appRoot . '/var/db/database.sqlite',
-        ], $config);
+            ],
+            $config
+        );
 
         // obtaining the entity manager
         return new EntityManager($connection, $config);

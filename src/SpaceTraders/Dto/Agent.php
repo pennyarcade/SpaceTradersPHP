@@ -1,4 +1,5 @@
 <?php
+
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
@@ -18,7 +19,7 @@ class Agent implements JsonSerializable, Deserializable
      * @param string $accountId
      * @param string $symbol
      * @param string $headquarters
-     * @param int $credits
+     * @param int    $credits
      */
     public function __construct(string $accountId, string $symbol, string $headquarters, int $credits)
     {
@@ -37,7 +38,7 @@ class Agent implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $accountId
+     * @param  string $accountId
      * @return Agent
      */
     public function setAccountId(string $accountId): Agent
@@ -55,7 +56,7 @@ class Agent implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return Agent
      */
     public function setSymbol(string $symbol): Agent
@@ -73,7 +74,7 @@ class Agent implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $headquarters
+     * @param  string $headquarters
      * @return Agent
      */
     public function setHeadquarters(string $headquarters): Agent
@@ -91,7 +92,7 @@ class Agent implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $credits
+     * @param  int $credits
      * @return Agent
      */
     public function setCredits(int $credits): Agent

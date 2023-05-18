@@ -14,10 +14,10 @@ class SystemWaypoint implements JsonSerializable, Deserializable
     protected int $y;
 
     /**
-     * @param string $symbol
+     * @param string       $symbol
      * @param WaypointType $type
-     * @param int $x
-     * @param int $y
+     * @param int          $x
+     * @param int          $y
      */
     public function __construct(string $symbol, WaypointType $type, int $x, int $y)
     {
@@ -36,7 +36,7 @@ class SystemWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return SystemWaypoint
      */
     public function setSymbol(string $symbol): SystemWaypoint
@@ -54,7 +54,7 @@ class SystemWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param WaypointType $type
+     * @param  WaypointType $type
      * @return SystemWaypoint
      */
     public function setType(WaypointType $type): SystemWaypoint
@@ -72,7 +72,7 @@ class SystemWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $x
+     * @param  int $x
      * @return SystemWaypoint
      */
     public function setX(int $x): SystemWaypoint
@@ -90,7 +90,7 @@ class SystemWaypoint implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $y
+     * @param  int $y
      * @return SystemWaypoint
      */
     public function setY(int $y): SystemWaypoint

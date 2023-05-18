@@ -29,7 +29,7 @@ class ContractPayment implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $onAccepted
+     * @param  int $onAccepted
      * @return ContractPayment
      */
     public function setOnAccepted(int $onAccepted): ContractPayment
@@ -47,7 +47,7 @@ class ContractPayment implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $onFulfilled
+     * @param  int $onFulfilled
      * @return ContractPayment
      */
     public function setOnFulfilled(int $onFulfilled): ContractPayment

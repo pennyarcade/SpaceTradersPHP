@@ -16,12 +16,12 @@ class ShipCrew implements JsonSerializable, Deserializable
     protected int $wages;
 
     /**
-     * @param int $current
-     * @param int $required
-     * @param int $capacity
+     * @param int              $current
+     * @param int              $required
+     * @param int              $capacity
      * @param ShipCrewRotation $rotation
-     * @param int $morale
-     * @param int $wages
+     * @param int              $morale
+     * @param int              $wages
      */
     public function __construct(
         int $current,
@@ -48,7 +48,7 @@ class ShipCrew implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $current
+     * @param  int $current
      * @return ShipCrew
      */
     public function setCurrent(int $current): ShipCrew
@@ -66,7 +66,7 @@ class ShipCrew implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $required
+     * @param  int $required
      * @return ShipCrew
      */
     public function setRequired(int $required): ShipCrew
@@ -84,7 +84,7 @@ class ShipCrew implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $capacity
+     * @param  int $capacity
      * @return ShipCrew
      */
     public function setCapacity(int $capacity): ShipCrew
@@ -102,7 +102,7 @@ class ShipCrew implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipCrewRotation $rotation
+     * @param  ShipCrewRotation $rotation
      * @return ShipCrew
      */
     public function setRotation(ShipCrewRotation $rotation): ShipCrew
@@ -120,7 +120,7 @@ class ShipCrew implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $morale
+     * @param  int $morale
      * @return ShipCrew
      */
     public function setMorale(int $morale): ShipCrew
@@ -138,7 +138,7 @@ class ShipCrew implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $wages
+     * @param  int $wages
      * @return ShipCrew
      */
     public function setWages(int $wages): ShipCrew

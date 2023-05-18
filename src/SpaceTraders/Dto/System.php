@@ -13,19 +13,23 @@ class System implements JsonSerializable, Deserializable
     protected SystemType $type;
     protected int $x;
     protected int $y;
-    /** @var SystemWaypoint[] $waypoints */
+    /**
+     * @var SystemWaypoint[] $waypoints
+     */
     protected array $waypoints;
-    /** @var string[] $factions */
+    /**
+     * @var string[] $factions
+     */
     protected array $factions;
 
     /**
-     * @param string $symbol
-     * @param string $sectorSymbol
-     * @param SystemType $type
-     * @param int $x
-     * @param int $y
+     * @param string           $symbol
+     * @param string           $sectorSymbol
+     * @param SystemType       $type
+     * @param int              $x
+     * @param int              $y
      * @param SystemWaypoint[] $waypoints
-     * @param string[] $factions
+     * @param string[]         $factions
      */
     public function __construct(
         string $symbol,
@@ -54,7 +58,7 @@ class System implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return System
      */
     public function setSymbol(string $symbol): System
@@ -72,7 +76,7 @@ class System implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $sectorSymbol
+     * @param  string $sectorSymbol
      * @return System
      */
     public function setSectorSymbol(string $sectorSymbol): System
@@ -90,7 +94,7 @@ class System implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param SystemType $type
+     * @param  SystemType $type
      * @return System
      */
     public function setType(SystemType $type): System
@@ -108,7 +112,7 @@ class System implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $x
+     * @param  int $x
      * @return System
      */
     public function setX(int $x): System
@@ -126,7 +130,7 @@ class System implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $y
+     * @param  int $y
      * @return System
      */
     public function setY(int $y): System
@@ -144,7 +148,7 @@ class System implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $waypoints
+     * @param  array $waypoints
      * @return System
      */
     public function setWaypoints(array $waypoints): System
@@ -162,7 +166,7 @@ class System implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param array $factions
+     * @param  array $factions
      * @return System
      */
     public function setFactions(array $factions): System

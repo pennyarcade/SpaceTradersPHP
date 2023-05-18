@@ -12,7 +12,7 @@ class LeaderboadEntry implements JsonSerializable, Deserializable
 
     /**
      * @param string $agentSymbol
-     * @param int $value
+     * @param int    $value
      */
     public function __construct(string $agentSymbol, int $value)
     {
@@ -29,7 +29,7 @@ class LeaderboadEntry implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $agentSymbol
+     * @param  string $agentSymbol
      * @return LeaderboadEntry
      */
     public function setAgentSymbol(string $agentSymbol): LeaderboadEntry
@@ -47,7 +47,7 @@ class LeaderboadEntry implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $value
+     * @param  int $value
      * @return LeaderboadEntry
      */
     public function setValue(int $value): LeaderboadEntry

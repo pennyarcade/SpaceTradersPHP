@@ -24,13 +24,15 @@ class ApiService
     private array $options;
 
     /**
-     * @param ContainerInterface $container
+     * @param  ContainerInterface $container
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
     public function __construct(ContainerInterface $container)
     {
-        /** @var array $settings */
+        /**
+         * @var array $settings
+         */
         $settings = $container->get('settings');
         $this->config = $settings[self::class];
         $this->logger = $container->get(LoggerFactory::class)->getRotatingFileLogger('ApiService');
@@ -47,6 +49,7 @@ class ApiService
 
     /**
      * toggles RequestExceptions on Guzzle client
+     *
      * @return bool
      */
     public function toggleExceptions(): bool
@@ -62,8 +65,8 @@ class ApiService
     }
 
     /**
-     * @param int|null $page
-     * @param int|null $limit
+     * @param  int|null $page
+     * @param  int|null $limit
      * @return array|array[]
      */
     private function buildPaginationParameters(?int $page = null, ?int $limit = null): array
@@ -84,7 +87,7 @@ class ApiService
     }
 
     /**
-     * @param string|null $token
+     * @param  string|null $token
      * @return array|array[]
      */
     private function buildAuthorizationHeader(?string $token = null): array
@@ -101,7 +104,7 @@ class ApiService
     }
 
     /**
-     * @param array $data
+     * @param  array $data
      * @return array|array[]
      */
     private function buildJsonBody(array $data = []): array
@@ -116,10 +119,10 @@ class ApiService
     }
 
     /**
-     * @param string|array $endpoint
-     * @param int|null $page
-     * @param int|null $limit
-     * @param string|null $token
+     * @param  string|array $endpoint
+     * @param  int|null     $page
+     * @param  int|null     $limit
+     * @param  string|null  $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
@@ -161,9 +164,9 @@ class ApiService
     }
 
     /**
-     * @param string|array $endpoint
-     * @param array $jsonData
-     * @param string|null $token
+     * @param  string|array $endpoint
+     * @param  array        $jsonData
+     * @param  string|null  $token
      * @return ResponseInterface
      * @throws GuzzleException
      */
@@ -221,11 +224,11 @@ class ApiService
      *              endpoint to deposit goods into the contract.
      *              When your contract is fulfilled, you can call `/my/contracts/{contractId}/fulfill`
      *              to retrieve payment.
-     * @param FactionName $faction
-     * @param string $symbol
-     * @param string|null $email
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       FactionName $faction
+     * @param       string      $symbol
+     * @param       string|null $email
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function register(FactionName $faction, string $symbol, ?string $email): ResponseInterface
     {
@@ -242,11 +245,11 @@ class ApiService
 
     /**
      * @description Return a list of all systems.
-     * @param string $token
-     * @param int|null $page
-     * @param int|null $limit
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string   $token
+     * @param       int|null $page
+     * @param       int|null $limit
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getSystemList(string $token, ?int $page = null, ?int $limit = null): ResponseInterface
     {
@@ -255,10 +258,10 @@ class ApiService
 
     /**
      * @description Get the details of a system.
-     * @param string $systemSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $systemSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getSystem(string $systemSymbol, string $token): ResponseInterface
     {
@@ -278,12 +281,12 @@ class ApiService
     /**
      * @description Fetch all the waypoints for a given system. System must be charted or a ship must be
      *              present to return waypoint details.
-     * @param string $systemSymbol
-     * @param string $token
-     * @param int|null $page
-     * @param int|null $limit
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string   $systemSymbol
+     * @param       string   $token
+     * @param       int|null $page
+     * @param       int|null $limit
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getSystemWaypointList(
         string $systemSymbol,
@@ -306,11 +309,11 @@ class ApiService
 
     /**
      * @description View the details of a waypoint.
-     * @param string $systemSymbol
-     * @param string $waypointSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $systemSymbol
+     * @param       string $waypointSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getSystemWaypoint(string $systemSymbol, string $waypointSymbol, string $token): ResponseInterface
     {
@@ -332,11 +335,11 @@ class ApiService
      * @description Retrieve imports, exports and exchange data from a marketplace. Imports can be sold, exports can be
      *              purchased, and exchange goods can be purchased or sold. Send a ship to the waypoint to access trade
      *              good prices and recent transactions.
-     * @param string $systemSymbol
-     * @param string $waypointSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $systemSymbol
+     * @param       string $waypointSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getSystemWaypointMarket(
         string $systemSymbol,
@@ -359,11 +362,11 @@ class ApiService
 
     /**
      * @description Get the shipyard for a waypoint.
-     * @param string $systemSymbol
-     * @param string $waypointSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $systemSymbol
+     * @param       string $waypointSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getSystemWaypointShipyard(
         string $systemSymbol,
@@ -386,11 +389,11 @@ class ApiService
 
     /**
      * @description Get jump gate details for a waypoint.
-     * @param string $systemSymbol
-     * @param string $waypointSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $systemSymbol
+     * @param       string $waypointSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getSystemWaypointJumpgate(
         string $systemSymbol,
@@ -413,10 +416,10 @@ class ApiService
 
     /**
      * @description List all discovered factions in the game.
-     * @param int|null $page
-     * @param int|null $limit
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       int|null $page
+     * @param       int|null $limit
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getFactionList(
         ?int $page = null,
@@ -427,9 +430,9 @@ class ApiService
 
     /**
      * @description View the details of a faction.
-     * @param string $factionSymbol
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $factionSymbol
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getFaction(string $factionSymbol): ResponseInterface
     {
@@ -445,9 +448,9 @@ class ApiService
 
     /**
      * @description Fetch your agent's details.
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getMyAgent(string $token): ResponseInterface
     {
@@ -456,11 +459,11 @@ class ApiService
 
     /**
      * @description List all of your contracts.
-     * @param string $token
-     * @param int|null $page
-     * @param int|null $limit
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string   $token
+     * @param       int|null $page
+     * @param       int|null $limit
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getMyContractList(string $token, ?int $page = null, ?int $limit = null): ResponseInterface
     {
@@ -469,10 +472,10 @@ class ApiService
 
     /**
      * @description Get the details of a contract by ID.
-     * @param string $contractId
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $contractId
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getMyContract(string $contractId, string $token): ResponseInterface
     {
@@ -491,10 +494,10 @@ class ApiService
 
     /**
      * @description Accept a contract.
-     * @param string $contractId
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $contractId
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function acceptMyContract(string $contractId, string $token): ResponseInterface
     {
@@ -512,13 +515,13 @@ class ApiService
 
     /**
      * @description Deliver cargo on a given contract.
-     * @param string $contractId
-     * @param string $shipSymbol
-     * @param string $tradeSymbol
-     * @param int $units
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $contractId
+     * @param       string $shipSymbol
+     * @param       string $tradeSymbol
+     * @param       int    $units
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function deliverMyContract(
         string $contractId,
@@ -545,10 +548,10 @@ class ApiService
 
     /**
      * @description Fulfill a contract
-     * @param string $contractId
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $contractId
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function fulfillMyContract(string $contractId, string $token): ResponseInterface
     {
@@ -566,11 +569,11 @@ class ApiService
 
     /**
      * @description Retrieve all of your ships.
-     * @param string $token
-     * @param int|null $page
-     * @param int|null $limit
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string   $token
+     * @param       int|null $page
+     * @param       int|null $limit
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getMyShipList(string $token, ?int $page = null, ?int $limit = null): ResponseInterface
     {
@@ -579,11 +582,11 @@ class ApiService
 
     /**
      * @description Purchase a ship.
-     * @param ShipType $shipType
-     * @param string $waypointSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       ShipType $shipType
+     * @param       string   $waypointSymbol
+     * @param       string   $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function buyShip(ShipType $shipType, string $waypointSymbol, string $token): ResponseInterface
     {
@@ -603,10 +606,10 @@ class ApiService
 
     /**
      * @description Retrieve the details of your ship.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -625,10 +628,10 @@ class ApiService
 
     /**
      * @description Retrieve the cargo of your ship.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getMyShipCargo(string $shipSymbol, string $token): ResponseInterface
     {
@@ -649,10 +652,10 @@ class ApiService
      * @description Attempt to move your ship into orbit at it`s current location. The request will only succeed if
      *              your ship is capable of moving into orbit at the time of the request.
      *              The endpoint is idempotent - successive calls will succeed even if the ship is already in orbit.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function orbitMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -671,11 +674,11 @@ class ApiService
     /**
      * @description Attempt to refine the raw materials on your ship. The request will only succeed if your ship is
      *              capable of refining at the time of the request.
-     * @param string $shipSymbol
-     * @param OreType $produce
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string  $shipSymbol
+     * @param       OreType $produce
+     * @param       string  $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function refineOreOnMyShip(string $shipSymbol, OreType $produce, string $token): ResponseInterface
     {
@@ -698,10 +701,10 @@ class ApiService
      *              Waypoints in the universe are uncharted by default. These locations will not show up in the API
      *              until they have been charted by a ship.
      *              Charting a location will record your agent as the one who created the chart.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function chartMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -723,10 +726,10 @@ class ApiService
      *              Your ship cannot perform additional actions until your cooldown has expired. The duration of your
      *              cooldown is relative to the power consumption of the related modules or mounts for the action taken.
      *              Response returns a 204 status code (no-content) when the ship has no cooldown.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function getMyShipCooldown(string $shipSymbol, string $token): ResponseInterface
     {
@@ -747,10 +750,10 @@ class ApiService
      * @description Attempt to dock your ship at it´s current location. Docking will only succeed if the waypoint is a
      *              dockable location, and your ship is capable of docking at the time of the request.
      *              The endpoint is idempotent - successive calls will succeed even if the ship is already docked.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function dockMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -773,10 +776,10 @@ class ApiService
      *              extracting that resource.\n\nYour ship will enter a cooldown between consecutive survey requests.
      *              Surveys will eventually expire after a period of time. Multiple ships can use the
      *              same survey for extraction.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function surveyMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -795,11 +798,11 @@ class ApiService
     /**
      * @description Extract resources from the waypoint into your ship. Send an optional survey as the payload to
      *              target specific yields.
-     * @param string $shipSymbol
-     * @param Survey|null $survey
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string      $shipSymbol
+     * @param       Survey|null $survey
+     * @param       string      $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function extractOreMyShip(string $shipSymbol, ?Survey $survey, string $token): ResponseInterface
     {
@@ -822,12 +825,12 @@ class ApiService
 
     /**
      * @description Jettison cargo from your ship's cargo hold.
-     * @param string $shipSymbol
-     * @param string $symbol
-     * @param int $units
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $symbol
+     * @param       int    $units
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function jettisonFromMyShip(string $shipSymbol, string $symbol, int $units, string $token): ResponseInterface
     {
@@ -849,11 +852,11 @@ class ApiService
     /**
      * @description Jump your ship instantly to a target system. Unlike other forms of navigation, jumping requires
      *              a unit of antimatter.
-     * @param string $shipSymbol
-     * @param string $systemSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $systemSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function jumpMyShip(string $shipSymbol, string $systemSymbol, string $token): ResponseInterface
     {
@@ -878,11 +881,11 @@ class ApiService
      *              The returned response will detail the route information including the expected time of arrival.
      *              Most ship actions are unavailable until the ship has arrived at it`s destination.
      *              To travel between systems, see the ship's warp or jump actions.
-     * @param string $shipSymbol
-     * @param string $waypointSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $waypointSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function navigateMyShip(string $shipSymbol, string $waypointSymbol, string $token): ResponseInterface
     {
@@ -907,10 +910,10 @@ class ApiService
      *              The returned response will detail the route information including the expected time of arrival.
      *              Most ship actions are unavailable until the ship has arrived at it`s destination.
      *              To travel between systems, see the ship's warp or jump actions.
-     * @param string $shipSymbol
-     * @param ShipNavFlightMode $nav
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string            $shipSymbol
+     * @param       ShipNavFlightMode $nav
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function updateMyShipNavigation(
         string $shipSymbol,
@@ -920,7 +923,7 @@ class ApiService
             "patch update navigation My Ship",
         );
         $response = $this->client->patch(
-            $this->config['url'] . '/my/ships/'. $shipSymbol . '/nav',
+            $this->config['url'] . '/my/ships/' . $shipSymbol . '/nav',
             array_merge_recursive(
                 $this->options,
                 [
@@ -939,11 +942,11 @@ class ApiService
      *              and supplies from the ship's manifest, and will pay out crew wages from the agent's account.
      *              The returned response will detail the route information including the expected time of arrival.
      *              Most ship actions are unavailable until the ship has arrived at it's destination.
-     * @param string $shipSymbol
-     * @param string $waypointSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $waypointSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function warpMyShip(string $shipSymbol, string $waypointSymbol, string $token): ResponseInterface
     {
@@ -963,12 +966,12 @@ class ApiService
 
     /**
      * @description Sell cargo from your ship's cargo hold.
-     * @param string $shipSymbol
-     * @param string $symbol
-     * @param int $units
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $symbol
+     * @param       int    $units
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function sellFromMyShip(string $shipSymbol, string $symbol, int $units, string $token): ResponseInterface
     {
@@ -989,10 +992,10 @@ class ApiService
 
     /**
      * @description Activate your ship's sensor arrays to scan for system information.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function scanSystemsAtMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -1010,10 +1013,10 @@ class ApiService
 
     /**
      * @description Activate your ship's sensor arrays to scan for waypoint information.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function scanWaypointsAtMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -1031,10 +1034,10 @@ class ApiService
 
     /**
      * @description Activate your ship's sensor arrays to scan for ship information.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function scanShipsAtMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -1052,10 +1055,10 @@ class ApiService
 
     /**
      * @description Refuel your ship from the local market.
-     * @param string $shipSymbol
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function refuelMyShip(string $shipSymbol, string $token): ResponseInterface
     {
@@ -1073,12 +1076,12 @@ class ApiService
 
     /**
      * @description Purchase cargo from local market to your ship's cargo hold.
-     * @param string $shipSymbol
-     * @param string $symbol
-     * @param int $units
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $shipSymbol
+     * @param       string $symbol
+     * @param       int    $units
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function purchaseToMyShip(string $shipSymbol, string $symbol, int $units, string $token): ResponseInterface
     {
@@ -1099,13 +1102,13 @@ class ApiService
 
     /**
      * @description Transfer cargo between ships.
-     * @param string $fromShipSymbol
-     * @param string $toShipSymbol
-     * @param string $symbol
-     * @param int $units
-     * @param string $token
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @param       string $fromShipSymbol
+     * @param       string $toShipSymbol
+     * @param       string $symbol
+     * @param       int    $units
+     * @param       string $token
+     * @return      ResponseInterface
+     * @throws      GuzzleException
      */
     public function transferFromMyShip(
         string $fromShipSymbol,

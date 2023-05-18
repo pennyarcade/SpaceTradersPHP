@@ -17,11 +17,11 @@ class ShipReactor implements JsonSerializable, Deserializable
 
     /**
      * @param ShipReactorSymbolType $symbol
-     * @param string $name
-     * @param string $description
-     * @param int $condition
-     * @param int $powerOutput
-     * @param ShipRequirements $requirements
+     * @param string                $name
+     * @param string                $description
+     * @param int                   $condition
+     * @param int                   $powerOutput
+     * @param ShipRequirements      $requirements
      */
     public function __construct(
         ShipReactorSymbolType $symbol,
@@ -48,7 +48,7 @@ class ShipReactor implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipReactorSymbolType $symbol
+     * @param  ShipReactorSymbolType $symbol
      * @return ShipReactor
      */
     public function setSymbol(ShipReactorSymbolType $symbol): ShipReactor
@@ -66,7 +66,7 @@ class ShipReactor implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return ShipReactor
      */
     public function setName(string $name): ShipReactor
@@ -84,7 +84,7 @@ class ShipReactor implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return ShipReactor
      */
     public function setDescription(string $description): ShipReactor
@@ -102,7 +102,7 @@ class ShipReactor implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $condition
+     * @param  int $condition
      * @return ShipReactor
      */
     public function setCondition(int $condition): ShipReactor
@@ -120,7 +120,7 @@ class ShipReactor implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $powerOutput
+     * @param  int $powerOutput
      * @return ShipReactor
      */
     public function setPowerOutput(int $powerOutput): ShipReactor
@@ -138,7 +138,7 @@ class ShipReactor implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipRequirements $requirements
+     * @param  ShipRequirements $requirements
      * @return ShipReactor
      */
     public function setRequirements(ShipRequirements $requirements): ShipReactor

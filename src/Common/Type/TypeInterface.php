@@ -8,13 +8,14 @@ interface TypeInterface
 {
     /**
      * Type constructor.
-     * @param mixed $value
+     *
+     * @param  mixed $value
      * @throws InvalidArgumentException
      */
     public function __construct($value);
 
     /**
-     * @param mixed $value
+     * @param  mixed $value
      * @return bool
      */
     public function isValidValue($value): bool;
@@ -25,7 +26,7 @@ interface TypeInterface
     public function getValue(): mixed;
 
     /**
-     * @param mixed $value
+     * @param  mixed $value
      * @return self
      * @throws InvalidArgumentException
      */

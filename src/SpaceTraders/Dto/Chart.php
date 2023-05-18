@@ -7,7 +7,7 @@ use DateTime;
 use JsonSerializable;
 
 /**
- * @link: https://github.com/SpaceTradersAPI/api-docs/blob/main/models/Chart.json
+ * @link:       https://github.com/SpaceTradersAPI/api-docs/blob/main/models/Chart.json
  * @description "The chart of a system or waypoint, which makes the location visible to other agents."
  */
 class Chart implements JsonSerializable, Deserializable
@@ -17,8 +17,8 @@ class Chart implements JsonSerializable, Deserializable
     private ?DateTime $submittedOn;
 
     /**
-     * @param string|null $waypointSymbol
-     * @param string|null $submittedBy
+     * @param string|null   $waypointSymbol
+     * @param string|null   $submittedBy
      * @param DateTime|null $submittedOn
      */
     public function __construct(?string $waypointSymbol, ?string $submittedBy, ?DateTime $submittedOn)
@@ -37,7 +37,7 @@ class Chart implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string|null $waypointSymbol
+     * @param  string|null $waypointSymbol
      * @return Chart
      */
     public function setWaypointSymbol(?string $waypointSymbol): Chart
@@ -55,7 +55,7 @@ class Chart implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string|null $submittedBy
+     * @param  string|null $submittedBy
      * @return Chart
      */
     public function setSubmittedBy(?string $submittedBy): Chart
@@ -73,7 +73,7 @@ class Chart implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param DateTime|null $submittedOn
+     * @param  DateTime|null $submittedOn
      * @return Chart
      */
     public function setSubmittedOn(?DateTime $submittedOn): Chart

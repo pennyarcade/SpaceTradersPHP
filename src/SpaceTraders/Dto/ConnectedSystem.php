@@ -17,13 +17,13 @@ class ConnectedSystem implements JsonSerializable, Deserializable
     protected int    $distance;
 
     /**
-     * @param string $symbol
-     * @param string $sectorSymbol
+     * @param string     $symbol
+     * @param string     $sectorSymbol
      * @param SystemType $type
-     * @param string $factionSymbol
-     * @param int $x
-     * @param int $y
-     * @param int $distance
+     * @param string     $factionSymbol
+     * @param int        $x
+     * @param int        $y
+     * @param int        $distance
      */
     public function __construct(
         string $symbol,
@@ -52,7 +52,7 @@ class ConnectedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return ConnectedSystem
      */
     public function setSymbol(string $symbol): ConnectedSystem
@@ -70,7 +70,7 @@ class ConnectedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $sectorSymbol
+     * @param  string $sectorSymbol
      * @return ConnectedSystem
      */
     public function setSectorSymbol(string $sectorSymbol): ConnectedSystem
@@ -88,7 +88,7 @@ class ConnectedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param SystemType $type
+     * @param  SystemType $type
      * @return ConnectedSystem
      */
     public function setType(SystemType $type): ConnectedSystem
@@ -106,7 +106,7 @@ class ConnectedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $factionSymbol
+     * @param  string $factionSymbol
      * @return ConnectedSystem
      */
     public function setFactionSymbol(string $factionSymbol): ConnectedSystem
@@ -124,7 +124,7 @@ class ConnectedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $x
+     * @param  int $x
      * @return ConnectedSystem
      */
     public function setX(int $x): ConnectedSystem
@@ -142,7 +142,7 @@ class ConnectedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $y
+     * @param  int $y
      * @return ConnectedSystem
      */
     public function setY(int $y): ConnectedSystem
@@ -160,7 +160,7 @@ class ConnectedSystem implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $distance
+     * @param  int $distance
      * @return ConnectedSystem
      */
     public function setDistance(int $distance): ConnectedSystem

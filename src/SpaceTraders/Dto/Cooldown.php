@@ -14,9 +14,9 @@ class Cooldown implements JsonSerializable, Deserializable
     protected DateTime  $expiration;
 
     /**
-     * @param string $shipSymbol
-     * @param int $totalSeconds
-     * @param int $remainingSeconds
+     * @param string   $shipSymbol
+     * @param int      $totalSeconds
+     * @param int      $remainingSeconds
      * @param DateTime $expiration
      */
     public function __construct(string $shipSymbol, int $totalSeconds, int $remainingSeconds, DateTime $expiration)
@@ -36,7 +36,7 @@ class Cooldown implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $shipSymbol
+     * @param  string $shipSymbol
      * @return Cooldown
      */
     public function setShipSymbol(string $shipSymbol): Cooldown
@@ -54,7 +54,7 @@ class Cooldown implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $totalSeconds
+     * @param  int $totalSeconds
      * @return Cooldown
      */
     public function setTotalSeconds(int $totalSeconds): Cooldown
@@ -72,7 +72,7 @@ class Cooldown implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param int $remainingSeconds
+     * @param  int $remainingSeconds
      * @return Cooldown
      */
     public function setRemainingSeconds(int $remainingSeconds): Cooldown
@@ -90,7 +90,7 @@ class Cooldown implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param DateTime $expiration
+     * @param  DateTime $expiration
      * @return Cooldown
      */
     public function setExpiration(DateTime $expiration): Cooldown

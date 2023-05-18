@@ -13,8 +13,8 @@ class ShipRegistration implements JsonSerializable, Deserializable
     protected ShipRole $role;
 
     /**
-     * @param string $name
-     * @param string $factionSymbol
+     * @param string   $name
+     * @param string   $factionSymbol
      * @param ShipRole $role
      */
     public function __construct(string $name, string $factionSymbol, ShipRole $role)
@@ -33,7 +33,7 @@ class ShipRegistration implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return ShipRegistration
      */
     public function setName(string $name): ShipRegistration
@@ -51,7 +51,7 @@ class ShipRegistration implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $factionSymbol
+     * @param  string $factionSymbol
      * @return ShipRegistration
      */
     public function setFactionSymbol(string $factionSymbol): ShipRegistration
@@ -69,7 +69,7 @@ class ShipRegistration implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ShipRole $role
+     * @param  ShipRole $role
      * @return ShipRegistration
      */
     public function setRole(ShipRole $role): ShipRegistration

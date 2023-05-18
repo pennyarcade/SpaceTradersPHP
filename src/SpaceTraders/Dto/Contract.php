@@ -18,13 +18,13 @@ class Contract implements JsonSerializable, Deserializable
     protected DateTime $expiration;
 
     /**
-     * @param string $id
-     * @param string $factionSymbol
-     * @param ContractType $type
+     * @param string        $id
+     * @param string        $factionSymbol
+     * @param ContractType  $type
      * @param ContractTerms $terms
-     * @param bool $accepted
-     * @param bool $fulfilled
-     * @param DateTime $expiration
+     * @param bool          $accepted
+     * @param bool          $fulfilled
+     * @param DateTime      $expiration
      */
     public function __construct(
         string $id,
@@ -53,7 +53,7 @@ class Contract implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $id
+     * @param  string $id
      * @return Contract
      */
     public function setId(string $id): Contract
@@ -71,7 +71,7 @@ class Contract implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $factionSymbol
+     * @param  string $factionSymbol
      * @return Contract
      */
     public function setFactionSymbol(string $factionSymbol): Contract
@@ -89,7 +89,7 @@ class Contract implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ContractType $type
+     * @param  ContractType $type
      * @return Contract
      */
     public function setType(ContractType $type): Contract
@@ -107,7 +107,7 @@ class Contract implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param ContractTerms $terms
+     * @param  ContractTerms $terms
      * @return Contract
      */
     public function setTerms(ContractTerms $terms): Contract
@@ -125,7 +125,7 @@ class Contract implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param bool $accepted
+     * @param  bool $accepted
      * @return Contract
      */
     public function setAccepted(bool $accepted): Contract
@@ -143,7 +143,7 @@ class Contract implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param bool $fulfilled
+     * @param  bool $fulfilled
      * @return Contract
      */
     public function setFulfilled(bool $fulfilled): Contract
@@ -161,7 +161,7 @@ class Contract implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param DateTime $expiration
+     * @param  DateTime $expiration
      * @return Contract
      */
     public function setExpiration(DateTime $expiration): Contract

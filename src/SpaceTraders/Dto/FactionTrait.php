@@ -14,8 +14,8 @@ class FactionTrait implements JsonSerializable, Deserializable
 
     /**
      * @param FactionTraitType $type
-     * @param string $name
-     * @param string $description
+     * @param string           $name
+     * @param string           $description
      */
     public function __construct(FactionTraitType $type, string $name, string $description)
     {
@@ -33,7 +33,7 @@ class FactionTrait implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param FactionTraitType $type
+     * @param  FactionTraitType $type
      * @return FactionTrait
      */
     public function setType(FactionTraitType $type): FactionTrait
@@ -51,7 +51,7 @@ class FactionTrait implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return FactionTrait
      */
     public function setName(string $name): FactionTrait
@@ -69,7 +69,7 @@ class FactionTrait implements JsonSerializable, Deserializable
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return FactionTrait
      */
     public function setDescription(string $description): FactionTrait

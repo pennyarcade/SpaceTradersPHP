@@ -7,7 +7,7 @@ use DateTime;
 use JsonSerializable;
 
 /**
- * @link: https://github.com/SpaceTradersAPI/api-docs/blob/main/models/Chart.json
+ * @link:       https://github.com/SpaceTradersAPI/api-docs/blob/main/models/Chart.json
  * @description "A resource survey of a waypoint, detailing a specific extraction location and the types
  *              of resources that can be found there."
  */
@@ -15,16 +15,18 @@ class Survey implements JsonSerializable
 {
     private string $signature;
     private string $symbol;
-    /** @var SurveyDeposit[]  */
+    /**
+     * @var SurveyDeposit[]
+     */
     private array $deposits;
     private DateTime $expiration;
     private SurveyDepositSize $size;
 
     /**
-     * @param string $signature
-     * @param string $symbol
-     * @param SurveyDeposit[] $deposits
-     * @param DateTime $expiration
+     * @param string            $signature
+     * @param string            $symbol
+     * @param SurveyDeposit[]   $deposits
+     * @param DateTime          $expiration
      * @param SurveyDepositSize $size
      */
     public function __construct(
@@ -50,7 +52,7 @@ class Survey implements JsonSerializable
     }
 
     /**
-     * @param string $signature
+     * @param  string $signature
      * @return Survey
      */
     public function setSignature(string $signature): Survey
@@ -68,7 +70,7 @@ class Survey implements JsonSerializable
     }
 
     /**
-     * @param string $symbol
+     * @param  string $symbol
      * @return Survey
      */
     public function setSymbol(string $symbol): Survey
@@ -86,7 +88,7 @@ class Survey implements JsonSerializable
     }
 
     /**
-     * @param array $deposits
+     * @param  array $deposits
      * @return Survey
      */
     public function setDeposits(array $deposits): Survey
@@ -104,7 +106,7 @@ class Survey implements JsonSerializable
     }
 
     /**
-     * @param DateTime $expiration
+     * @param  DateTime $expiration
      * @return Survey
      */
     public function setExpiration(DateTime $expiration): Survey
@@ -122,7 +124,7 @@ class Survey implements JsonSerializable
     }
 
     /**
-     * @param SurveyDepositSize $size
+     * @param  SurveyDepositSize $size
      * @return Survey
      */
     public function setSize(SurveyDepositSize $size): Survey

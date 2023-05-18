@@ -6,17 +6,21 @@ use InvalidArgumentException;
 
 abstract class AbstractRegexValidatedType implements TypeInterface
 {
-    /** @var mixed $value */
+    /**
+     * @var mixed $value
+     */
     protected $value;
 
     /**
      * return static regex pattern string
+     *
      * @return string
      */
     abstract protected static function pattern(): string;
 
     /**
      * Base64String constructor.
+     *
      * @param mixed $value
      */
     public function __construct($value)
@@ -25,7 +29,7 @@ abstract class AbstractRegexValidatedType implements TypeInterface
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed $value
      * @return bool
      */
     public function isValidValue($value): bool
