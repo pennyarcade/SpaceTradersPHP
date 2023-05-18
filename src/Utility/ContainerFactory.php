@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Copyright (c) 2023 Martin Toennishoff
+ */
 namespace App\Utility;
 
 use App\Logger\LoggerFactory;
@@ -9,10 +11,20 @@ use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Builds the DI/Service provider container
+ */
 class ContainerFactory
 {
+    /**
+     * @var bool
+     */
     private static bool $logToConsole = false;
 
+    /**
+     * @param bool $logToConsole
+     * @return void
+     */
     public static function setLogToConsole(bool $logToConsole): void
     {
         self::$logToConsole = $logToConsole;
