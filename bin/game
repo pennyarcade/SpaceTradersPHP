@@ -10,7 +10,7 @@ use Symfony\Component\Console\Application;
 $logToConsole = true;
 
 /** @var PsrCompatibleContainer $container */
-$container = require_once __DIR__ . '/../app/bootstrap.php';
+$container = require_once __DIR__ . '/../src/bootstrap.php';
 
 $application = new Application();
 $application->add(new Register($container));
