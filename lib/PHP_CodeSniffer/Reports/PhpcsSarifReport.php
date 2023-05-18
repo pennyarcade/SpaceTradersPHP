@@ -107,7 +107,7 @@ class PhpcsSarifReport implements Report
         $interactive = false,
         $toScreen = true
     ): void {
-        $currentWorkingDirectory = realpath(__DIR__ . '/../spaceTraderPHP');
+        $currentWorkingDirectory = realpath(__DIR__ . '/../../');
 
         $tool = [
             'driver' => [
