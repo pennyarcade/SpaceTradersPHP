@@ -1,0 +1,103 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# PHPMD is a spin-off project of PHP Depend and
+# aims to be a PHP equivalent of the well known Java tool PMD.
+# What PHPMD does is: It takes a given PHP source code base
+# and look for several potential problems within that source.
+# These problems can be things like:
+#   Possible bugs
+#   Suboptimal code
+#   Overcomplicated expressions
+#   Unused parameters, methods, properties
+# More details at https://phpmd.org/
+
+name: PHPCS
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "master" ]
+  schedule:
+    - cron: '39 10 * * 3'
+
+permissions:
+  contents: read
+
+jobs:
+  PHPMD:
+    name: Run PHPMD scanning
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # for checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@aa1fe473f9c687b6fb896056d771232c0bc41161
+        with:
+          coverage: none
+          tools: phpcs
+
+      - name: Run PHPCS
+        run: phpcs -v --standard=PSR12,PSR1,PSR2 --report-file phpcs-results.sarif --report=lib/PHP_CodeSniffer/Reports/PhpcsSarifReport.php src/
+        continue-on-error: true
+
+      #- name: PHP Code Sniffer (php-actions)
+        # You may pin to the exact commit or the version.
+        # uses: php-actions/phpcs@dfdd77a6edfc6d0d0f194bdf0c934c8d841ea2fa
+        #uses: php-actions/phpcs@v1.0.0
+        #with:
+          # What version of PHPCS to use
+          #version: # optional, default is latest
+          # What version of PHP to use
+          #php_version: # optional, default is latest
+          # Path to a vendored phpcs binary
+          #vendored_phpcs_path: # optional
+          # One or more files and/or directories to check
+          #path: ./src
+          # The name or path of the coding standard to use
+          #standard: PSR12,PSR1,PSR2
+          # A comma separated list of sniff codes to include checking (all sniffs must be part of the specified standard)
+          #sniffs: # optional
+          # A comma separated list of sniff codes to exclude from checking (all sniffs must be part of the specified standard)
+          #exclude: # optional
+          # A comma separated list of patterns to ignore files and directories
+          #ignore: # optional
+          # The number of spaces each tab represents
+          #tab_width: 4
+          # Print either the "full", "xml", "checkstyle", "csv", "json", "junit", "emacs", "source", "summary", "diff", "svnblame", "gitblame", "hgblame" or "notifysend" report, or specify the path to a custom report class, (the "full" report is printed by default)
+          #report: # default is full
+          # Write the report to the specified file path
+          #report_file: # optional
+          # How many columns wide screen reports should be printed or set to "auto" to use current screen width, where supported
+          #report_width: # optional
+          # A path to strip from the front of file paths inside reports
+          #basepath: # optional
+          # A comma separated list of files to run before processing begins
+          #bootstrap: # optional
+          # The encoding of the files being checked (default is utf-8)
+          #encoding: # optional
+          # A comma separated list of file extensions to check. The type of the file can be specified using: ext/type e.g., module/php,es/js
+          #extensions: # optional
+          # The minimum severity required to display an error or warning
+          #severity: # optional
+          # The minimum severity required to display an error
+          #error_severity: # optional
+          # The minimum severity required to display a warning
+          #warning_severity: # optional
+          # Extra arguments to pass to the phpcs binary
+          #args: # optional
+
+      - name: Upload analysis results to GitHub
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: phpcs-results.sarif
+          wait-for-processing: true
