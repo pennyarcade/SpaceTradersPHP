@@ -47,7 +47,7 @@ jobs:
           tools: phpcs
 
       - name: Run PHPCS
-        run: phpcs -v --standard=PSR12,PSR1,PSR2 --report-file phpcs-results.sarif --report=lib/PHP_CodeSniffer/Reports/PhpcsSarifReport.php src/
+        run: phpcs -v --standard=PSR12,PSR1,PSR2 --report-file=phpcs-results.sarif --report=lib/PHP_CodeSniffer/Reports/PhpcsSarifReport.php src/
         continue-on-error: true
 
       #- name: PHP Code Sniffer (php-actions)
