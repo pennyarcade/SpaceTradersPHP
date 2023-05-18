@@ -50,15 +50,17 @@ class PhpcsSarifReport implements Report
                             'text' => $error['message']
                         ],
                         'locations'  => [
-                            'physicalLocation' => [
-                                'artifactLocation' => [
-                                     'uri' => $filename,
-                                     'uriBaseId' => self::URI_BASE_ID
-                                ],
-                                'region'     => [
-                                    'startLine' => $line,
-                                    'startColumn' => $column
-                                ],
+                            [
+                                'physicalLocation' => [
+                                    'artifactLocation' => [
+                                         'uri' => $filename,
+                                         'uriBaseId' => self::URI_BASE_ID
+                                    ],
+                                    'region'     => [
+                                        'startLine' => $line,
+                                        'startColumn' => $column
+                                    ],
+                                ]
                             ]
                         ],
 
