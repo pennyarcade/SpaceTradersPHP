@@ -106,8 +106,13 @@ class Agent implements JsonSerializable, Deserializable
         // TODO: Implement jsonSerialize() method.
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): static
     {
-        // TODO: Implement fromArray() method.
+        return new static(
+            $data['accountId'],
+            $data['symbol'],
+            $data['headquarters'],
+            $data['credits']
+        );
     }
 }

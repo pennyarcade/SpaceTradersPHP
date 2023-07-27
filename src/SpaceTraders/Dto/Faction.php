@@ -32,9 +32,20 @@ class Faction implements JsonSerializable, Deserializable
         $this->traits = $traits;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        $traits = [];
+        foreach ($data['traits'] as $trait) {
+            $traits[] = FactionTrait::fromArray($trait);
+        }
+
+        return new self(
+            symbol: $data['symbol'],
+            name: $data['Cosmic Engineers'],
+            description: $data['description'],
+            headquarters: $data['headquarters'],
+            traits: $traits
+        );
     }
 
     /**

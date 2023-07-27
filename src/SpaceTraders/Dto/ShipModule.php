@@ -147,9 +147,16 @@ class ShipModule implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            symbol: ShipModuleSymbolType::fromName($data('symbol')),
+            capacity: $data('capacity'),
+            range: $data('range'),
+            name: $data('name'),
+            description: $data('description'),
+            requirements: ShipRequirements::fromArray($data('requirents'))
+        );
     }
 
     public function jsonSerialize(): mixed

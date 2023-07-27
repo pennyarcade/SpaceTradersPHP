@@ -78,9 +78,13 @@ class ShipRegistration implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            name: $data['name'],
+            factionSymbol: $data['factionSymbol'],
+            role: ShipRole::fromName($data['role'])
+        );
     }
 
     public function jsonSerialize(): mixed

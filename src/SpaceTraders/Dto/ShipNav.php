@@ -37,9 +37,15 @@ class ShipNav implements JsonSerializable, Deserializable
     }
 
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            systemSymbol: $data['systemSymbol'],
+            waypointSymbol: $data['waypointSymbol'],
+            route: ShipNavRoute::fromArray($data['route']),
+            status: ShipNavStatus::fromName($data['status']),
+            flightMode: ShipNavFlightMode::fromName($data['flightMode'])
+        );
     }
 
     public function jsonSerialize(): mixed

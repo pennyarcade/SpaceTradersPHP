@@ -98,9 +98,14 @@ class ContractDeliverGood implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            tradeSymbol: $data['tradeSymbol'],
+            destinationSymbol: $data['destinationSymbol'],
+            unitsRequired: $data['unitsRequired'],
+            unitsFulfilled: $data['unitsFulfilled']
+        );
     }
 
     public function jsonSerialize(): mixed

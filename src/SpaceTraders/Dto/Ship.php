@@ -263,9 +263,31 @@ class Ship implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        $modules = [];
+        foreach ($data['modules'] as $module) {
+            $modules[] = ShipModule::fromArray($module);
+        }
+
+        $mounts = [];
+        foreach ($data['modules'] as $mount) {
+            $mounts[] = ShipModule::fromArray($mount);
+        }
+
+        return new self(
+            symbol: $data['symbol'],
+            registration: ShipRegistration::fromArray($data['registration']),
+            nav: ShipNav::fromArray($data['nav']),
+            crew: ShipCrew::fromArray($data['crew']),
+            frame: ShipFrame::fromName($data['frame']),
+            reactor: ShipReactor::fromArray($data['reactor']),
+            engine: ShipEngine::fromArray($data['engine']),
+            modules: $modules,
+            mounts: $mounts,
+            cargo: ShipCargo::fromArray($data['cargo']),
+            fuel: ShipFuel::fromArray($data['fuel'])
+        );
     }
 
     public function jsonSerialize(): mixed

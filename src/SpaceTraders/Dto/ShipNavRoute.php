@@ -4,6 +4,7 @@ namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
 use DateTime;
+use Exception;
 use JsonSerializable;
 
 class ShipNavRoute implements JsonSerializable, Deserializable
@@ -103,9 +104,17 @@ class ShipNavRoute implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    /**
+     * @throws Exception
+     */
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            destination: ShipNavRouteWaypoint::fromArray($data['destination']),
+            departure: ShipNavRouteWaypoint::fromArray($data['departure']),
+            departureTime: new DateTime($data['departureTime']),
+            arrival: new DateTime($data['departureTime'])
+        );
     }
 
     public function jsonSerialize(): mixed

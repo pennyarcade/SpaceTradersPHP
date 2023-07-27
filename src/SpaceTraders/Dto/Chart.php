@@ -87,7 +87,7 @@ class Chart implements JsonSerializable, Deserializable
         // TODO: Implement jsonSerialize() method.
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
         // TODO: Implement fromArray() method.
     }

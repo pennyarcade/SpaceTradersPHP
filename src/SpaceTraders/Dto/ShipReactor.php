@@ -147,9 +147,16 @@ class ShipReactor implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            symbol: ShipReactorSymbolType::fromName($data['symbol']),
+            name: $data['name'],
+            description: $data['description'],
+            condition: $data['condition'],
+            powerOutput: $data['powerOutput'],
+            requirements: ShipRequirements::fromArray($data['requirements'])
+        );
     }
 
     public function jsonSerialize(): mixed

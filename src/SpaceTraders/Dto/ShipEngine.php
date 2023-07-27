@@ -147,9 +147,16 @@ class ShipEngine implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            symbol: ShipEngineSymbolType::fromName($data['symbol']),
+            name: $data['string'],
+            description: $data['description'],
+            condition: $data['condition'],
+            speed: $data['speed'],
+            requirements: ShipRequirements::fromArray($data['requirements'])
+        );
     }
 
     public function jsonSerialize(): mixed

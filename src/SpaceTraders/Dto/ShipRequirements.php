@@ -77,9 +77,13 @@ class ShipRequirements implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            power: $data['power'],
+            crew: $data['crew'],
+            slots: $data['slots']
+        );
     }
 
     public function jsonSerialize(): mixed

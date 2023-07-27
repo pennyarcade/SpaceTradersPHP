@@ -86,8 +86,17 @@ class ContractTerms implements JsonSerializable, Deserializable
         // TODO: Implement jsonSerialize() method.
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): static
     {
-        // TODO: Implement fromArray() method.
+        $goods = [];
+        foreach ($data['deliver'] as $good) {
+            $goods[] = ContractDeliverGood::fromArray($good);
+        }
+
+        return new self(
+            deadline: new DateTime($data['deadline']),
+            payment: ContractPayment::fromArray($data['payment']),
+            deliver: $goods
+        );
     }
 }

@@ -16,15 +16,17 @@ class Contract implements JsonSerializable, Deserializable
     protected bool $accepted;
     protected bool $fulfilled;
     protected DateTime $expiration;
+    protected DateTime $deadlineToAccept;
 
     /**
-     * @param string        $id
-     * @param string        $factionSymbol
-     * @param ContractType  $type
+     * @param string $id
+     * @param string $factionSymbol
+     * @param ContractType $type
      * @param ContractTerms $terms
-     * @param bool          $accepted
-     * @param bool          $fulfilled
-     * @param DateTime      $expiration
+     * @param bool $accepted
+     * @param bool $fulfilled
+     * @param DateTime $expiration
+     * @param DateTime $deadlineToAccept
      */
     public function __construct(
         string $id,
@@ -33,7 +35,8 @@ class Contract implements JsonSerializable, Deserializable
         ContractTerms $terms,
         bool $accepted,
         bool $fulfilled,
-        DateTime $expiration
+        DateTime $expiration,
+        DateTime $deadlineToAccept
     ) {
         $this->id = $id;
         $this->factionSymbol = $factionSymbol;
@@ -42,6 +45,7 @@ class Contract implements JsonSerializable, Deserializable
         $this->accepted = $accepted;
         $this->fulfilled = $fulfilled;
         $this->expiration = $expiration;
+        $this->deadlineToAccept = $deadlineToAccept;
     }
 
     /**
@@ -170,13 +174,41 @@ class Contract implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function jsonSerialize(): mixed
+    /**
+     * @return DateTime
+     */
+    public function getDeadlineToAccept(): DateTime
     {
-        // TODO: Implement jsonSerialize() method.
+        return $this->deadlineToAccept;
     }
 
-    public function fromArray(array $data): static
+    /**
+     * @param DateTime $deadlineToAccept
+     * @return Contract
+     */
+    public function setDeadlineToAccept(DateTime $deadlineToAccept): Contract
     {
-        // TODO: Implement fromArray() method.
+        $this->deadlineToAccept = $deadlineToAccept;
+        return $this;
+    }
+
+    public function jsonSerialize(): string
+    {
+        // TODO: Implement jsonSerialize() method.
+        return '';
+    }
+
+    public static function fromArray(array $data): static
+    {
+        return new self(
+            id: $data['id'],
+            factionSymbol: $data['factionSymbol'],
+            type: ContractType::fromName($data['type']),
+            terms: ContractTerms::fromArray($data['terms']),
+            accepted: $data['accepted'],
+            fulfilled: $data['fulfilled'],
+            expiration: new DateTime($data['expiration']),
+            deadlineToAccept: new DateTime($data['deadlineToAccept'])
+        );
     }
 }

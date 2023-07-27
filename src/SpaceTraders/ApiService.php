@@ -96,7 +96,7 @@ class ApiService
         if (!empty($token)) {
             return [
                 'header' => [
-                    'Authorization' => sprintf($this->config['authHeader'], $this->config['token'])
+                    'Authorization' => sprintf($this->config['authHeader'], $token)
                 ]
             ];
         }
@@ -143,7 +143,7 @@ class ApiService
         );
 
         $response = $this->client->get(
-            $this->config['url'] . ((empty($endpoint)) ? '/' . $endpoint : ''),
+            $this->config['url'] . ((!empty($endpoint)) ? '/' . $endpoint : ''),
             array_merge_recursive(
                 $this->options,
                 $this->buildPaginationParameters($page, $limit),
@@ -176,7 +176,7 @@ class ApiService
         ?string $token = null,
     ): ResponseInterface {
         $this->logger->debug(
-            "GET {$endpoint}",
+            "POST {$endpoint}",
             [
                 'endpoint'   => $endpoint,
                 'jsonData'   => $jsonData,
@@ -185,7 +185,7 @@ class ApiService
         );
 
         $response = $this->client->post(
-            $this->config['url'] . ((empty($endpoint)) ? '/' . $endpoint : ''),
+            $this->config['url'] . ((!empty($endpoint)) ? '/' . $endpoint : ''),
             array_merge_recursive(
                 $this->options,
                 $this->buildJsonBody($jsonData),

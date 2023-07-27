@@ -8,18 +8,18 @@ use JsonSerializable;
 
 class FactionTrait implements JsonSerializable, Deserializable
 {
-    protected FactionTraitType $type;
+    protected FactionTraitType $symbol;
     protected string $name;
     protected string $description;
 
     /**
-     * @param FactionTraitType $type
+     * @param FactionTraitType $symbol
      * @param string           $name
      * @param string           $description
      */
-    public function __construct(FactionTraitType $type, string $name, string $description)
+    public function __construct(FactionTraitType $symbol, string $name, string $description)
     {
-        $this->type = $type;
+        $this->symbol = $symbol;
         $this->name = $name;
         $this->description = $description;
     }
@@ -27,18 +27,18 @@ class FactionTrait implements JsonSerializable, Deserializable
     /**
      * @return FactionTraitType
      */
-    public function getType(): FactionTraitType
+    public function getSymbol(): FactionTraitType
     {
-        return $this->type;
+        return $this->symbol;
     }
 
     /**
-     * @param  FactionTraitType $type
+     * @param  FactionTraitType $symbol
      * @return FactionTrait
      */
-    public function setType(FactionTraitType $type): FactionTrait
+    public function setSymbol(FactionTraitType $symbol): FactionTrait
     {
-        $this->type = $type;
+        $this->symbol = $symbol;
         return $this;
     }
 
@@ -78,9 +78,13 @@ class FactionTrait implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            symbol: FactionTraitType::fromName($data['symbol']),
+            name: $data['name'],
+            description: $data['description']
+        );
     }
 
     public function jsonSerialize(): mixed

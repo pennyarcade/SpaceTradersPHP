@@ -147,9 +147,16 @@ class ShipCrew implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            current: $data['current'],
+            required: $data['required'],
+            capacity: $data['capacity'],
+            rotation: ShipCrewRotation::fromName($data['rotation']),
+            morale: $data['morale'],
+            wages: $data['wages']
+        );
     }
 
     public function jsonSerialize(): mixed

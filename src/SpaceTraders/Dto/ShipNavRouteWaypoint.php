@@ -3,6 +3,7 @@
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
+use App\SpaceTraders\Enum\WaypointType;
 use JsonSerializable;
 
 class ShipNavRouteWaypoint implements JsonSerializable, Deserializable
@@ -119,9 +120,15 @@ class ShipNavRouteWaypoint implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            symbol: $data['symbol'],
+            type: WaypointType::fromName($data['type']),
+            systemSymbol: $data['systemSymbol'],
+            x: $data['x'],
+            y: $data['y']
+        );
     }
 
     public function jsonSerialize(): mixed
