@@ -4,5 +4,5 @@ namespace App\Common;
 
 interface Deserializable
 {
-    public function fromArray(array $data): static;
+    public static function fromArray(array $data): self;
 }
