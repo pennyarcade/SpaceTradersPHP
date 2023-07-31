@@ -1,19 +1,27 @@
 <?php
 
-namespace App\SpaceTraders\Dto;
+namespace App\Persistence\Entity;
 
 use App\Common\Deserializable;
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use JsonSerializable;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @link:       https://github.com/SpaceTradersAPI/api-docs/blob/main/models/Chart.json
  * @description "The chart of a system or waypoint, which makes the location visible to other agents."
  */
-class Chart implements JsonSerializable, Deserializable
+#[ORM\Entity]
+#[ORM\Table(name: 'chart')]
+#[ORM\HasLifecycleCallbacks]
+class Chart extends BasicEntity implements JsonSerializable, Deserializable
 {
+    #[ORM\Column(type: Types::STRING)]
     private ?string $waypointSymbol;
+    #[ORM\Column(type: Types::STRING)]
     private ?string $submittedBy;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTime $submittedOn;
 
     /**
@@ -82,9 +90,10 @@ class Chart implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         // TODO: Implement jsonSerialize() method.
+        return [];
     }
 
     public static function fromArray(array $data): self

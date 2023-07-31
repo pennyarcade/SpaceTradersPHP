@@ -2,22 +2,23 @@
 
 namespace App\Persistence\Entity;
 
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-class BasicEntity
+abstract class BasicEntity
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     #[ORM\GeneratedValue]
     protected int $id;
 
     #[ORM\Column(name: 'created_date', type: Types::DATETIME_MUTABLE, updatable: false)]
-    protected \DateTime $created;
+    protected ?DateTime $created;
     #[ORM\Column(name: 'changed_date', type: Types::DATETIME_MUTABLE)]
-    protected \DateTime $changed;
+    protected ?DateTime $changed;
     #[ORM\Column(name: 'expires_date', type: Types::DATETIME_MUTABLE, nullable: true)]
-    protected ?\DateTime $expires;
+    protected ?DateTime $expires;
 
     /**
      * @return int
@@ -29,63 +30,63 @@ class BasicEntity
 
     /**
      * @param  int $id
-     * @return Agent
+     * @return static
      */
-    public function setId(int $id): Agent
+    public function setId(int $id): static
     {
         $this->id = $id;
         return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime|null
      */
-    public function getCreated(): \DateTime
+    public function getCreated(): ?DateTime
     {
         return $this->created;
     }
 
     /**
-     * @param  \DateTime $created
-     * @return BasicEntity
+     * @param  DateTime|null $created
+     * @return static
      */
-    public function setCreated(\DateTime $created): BasicEntity
+    public function setCreated(?DateTime $created): static
     {
         $this->created = $created;
         return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime|null
      */
-    public function getChanged(): \DateTime
+    public function getChanged(): ?DateTime
     {
         return $this->changed;
     }
 
     /**
-     * @param  \DateTime $changed
-     * @return BasicEntity
+     * @param  DateTime|null $changed
+     * @return static
      */
-    public function setChanged(\DateTime $changed): BasicEntity
+    public function setChanged(?DateTime $changed): static
     {
         $this->changed = $changed;
         return $this;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpires(): ?\DateTime
+    public function getExpires(): ?DateTime
     {
         return $this->expires;
     }
 
     /**
-     * @param  \DateTime|null $expires
-     * @return BasicEntity
+     * @param  DateTime|null $expires
+     * @return static
      */
-    public function setExpires(?\DateTime $expires): BasicEntity
+    public function setExpires(?DateTime $expires): static
     {
         $this->expires = $expires;
         return $this;
@@ -93,11 +94,11 @@ class BasicEntity
 
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function updatedTimestamps(): void
+    public function updateTimestamps(): void
     {
-        $this->setChanged(new \DateTime('now'));
+        $this->setChanged(new DateTime('now'));
         if ($this->getCreated() === null) {
-            $this->setCreated(new \DateTime('now'));
+            $this->setCreated(new DateTime('now'));
         }
     }
 }

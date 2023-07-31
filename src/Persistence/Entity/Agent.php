@@ -2,37 +2,42 @@
 
 namespace App\Persistence\Entity;
 
-use App\SpaceTraders\Dto\Agent as AgentDto;
-use DateTime;
+use App\Common\Deserializable;
 use Doctrine\DBAL\Types\Types;
+use JsonSerializable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'agent')]
 #[ORM\HasLifecycleCallbacks]
-class Agent extends AgentDto
+class Agent extends BasicEntity implements JsonSerializable, Deserializable
 {
-    #[ORM\Id]
-    #[ORM\Column(type: 'integer')]
-    #[ORM\GeneratedValue]
-    protected int $id;
-    #[ORM\Column(name: 'created_date', type: Types::DATETIME_MUTABLE, updatable: false)]
-    protected DateTime $created;
-    #[ORM\Column(name: 'changed_date', type: Types::DATETIME_MUTABLE)]
-    protected DateTime $changed;
-    #[ORM\Column(name: 'expires_date', type: Types::DATETIME_MUTABLE, nullable: true)]
-    protected ?DateTime $expires;
-
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: Types::STRING)]
     protected string $accountId;
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: Types::STRING)]
     protected string $symbol;
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     protected string $headquarters;
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     protected int    $credits;
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: Types::STRING)]
     private string $token;
+
+    /**
+     * @param string $accountId
+     * @param string $symbol
+     * @param string $headquarters
+     * @param int $credits
+     * @param string $token
+     */
+    public function __construct(string $accountId, string $symbol, string $headquarters, int $credits, string $token)
+    {
+        $this->accountId = $accountId;
+        $this->symbol = $symbol;
+        $this->headquarters = $headquarters;
+        $this->credits = $credits;
+        $this->token = $token;
+    }
 
     /**
      * @return string
@@ -53,84 +58,93 @@ class Agent extends AgentDto
     }
 
     /**
+     * @return string
+     */
+    public function getAccountId(): string
+    {
+        return $this->accountId;
+    }
+
+    /**
+     * @param string $accountId
+     * @return Agent
+     */
+    public function setAccountId(string $accountId): Agent
+    {
+        $this->accountId = $accountId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSymbol(): string
+    {
+        return $this->symbol;
+    }
+
+    /**
+     * @param  string $symbol
+     * @return Agent
+     */
+    public function setSymbol(string $symbol): Agent
+    {
+        $this->symbol = $symbol;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeadquarters(): string
+    {
+        return $this->headquarters;
+    }
+
+    /**
+     * @param  string $headquarters
+     * @return Agent
+     */
+    public function setHeadquarters(string $headquarters): Agent
+    {
+        $this->headquarters = $headquarters;
+        return $this;
+    }
+
+    /**
      * @return int
      */
-    public function getId(): int
+    public function getCredits(): int
     {
-        return $this->id;
+        return $this->credits;
     }
 
     /**
-     * @param  int $id
+     * @param  int $credits
      * @return Agent
      */
-    public function setId(int $id): Agent
+    public function setCredits(int $credits): Agent
     {
-        $this->id = $id;
+        $this->credits = $credits;
         return $this;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getCreated(): DateTime
+    public function jsonSerialize(): array
     {
-        return $this->created;
+        // TODO: Implement jsonSerialize() method.
+        return [];
     }
 
-    /**
-     * @param  DateTime $created
-     * @return Agent
-     */
-    public function setCreated(DateTime $created): Agent
+    public static function fromArray(array $data): self
     {
-        $this->created = $created;
-        return $this;
+        return new self(
+            $data['accountId'],
+            $data['symbol'],
+            $data['headquarters'],
+            $data['credits'],
+            $data['token']
+        );
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getChanged(): DateTime
-    {
-        return $this->changed;
-    }
 
-    /**
-     * @param  DateTime $changed
-     * @return Agent
-     */
-    public function setChanged(DateTime $changed): Agent
-    {
-        $this->changed = $changed;
-        return $this;
-    }
-
-    /**
-     * @return DateTime|null
-     */
-    public function getExpires(): ?DateTime
-    {
-        return $this->expires;
-    }
-
-    /**
-     * @param  DateTime|null $expires
-     * @return Agent
-     */
-    public function setExpires(?DateTime $expires): Agent
-    {
-        $this->expires = $expires;
-        return $this;
-    }
-
-    #[ORM\PrePersist]
-    #[ORM\PreUpdate]
-    public function updatedTimestamps(): void
-    {
-        $this->setChanged(new DateTime('now'));
-        if ($this->getCreated() === null) {
-            $this->setCreated(new DateTime('now'));
-        }
-    }
 }

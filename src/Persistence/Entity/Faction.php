@@ -1,16 +1,27 @@
 <?php
 
-namespace App\SpaceTraders\Dto;
+namespace App\Persistence\Entity;
 
 use App\Common\Deserializable;
+use App\SpaceTraders\Dto\FactionTrait;
+use Doctrine\DBAL\Types\Types;
 use JsonSerializable;
+use Doctrine\ORM\Mapping as ORM;
 
-class Faction implements JsonSerializable, Deserializable
+#[ORM\Entity]
+#[ORM\Table(name: 'faction')]
+#[ORM\HasLifecycleCallbacks]
+class Faction extends BasicEntity implements JsonSerializable, Deserializable
 {
+    #[ORM\Column(type: Types::STRING)]
     protected string $symbol;
+    #[ORM\Column(type: Types::STRING)]
     protected string $name;
+    #[ORM\Column(type: Types::STRING)]
     protected string $description;
+    #[ORM\Column(type: Types::STRING)]
     protected string $headquarters;
+
     /**
      * @var FactionTrait[] $traits
      */
@@ -41,7 +52,7 @@ class Faction implements JsonSerializable, Deserializable
 
         return new self(
             symbol: $data['symbol'],
-            name: $data['Cosmic Engineers'],
+            name: $data['name'],
             description: $data['description'],
             headquarters: $data['headquarters'],
             traits: $traits
@@ -138,8 +149,9 @@ class Faction implements JsonSerializable, Deserializable
         return $this;
     }
 
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         // TODO: Implement jsonSerialize() method.
+        return [];
     }
 }
