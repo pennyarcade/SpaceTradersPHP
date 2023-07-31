@@ -3,7 +3,7 @@
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
-use App\SpaceTraders\Enum\FactionName;
+use App\Persistence\Entity\Chart;
 use App\SpaceTraders\Enum\WaypointType;
 use JsonSerializable;
 

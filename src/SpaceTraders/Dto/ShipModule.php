@@ -9,24 +9,24 @@ use JsonSerializable;
 class ShipModule implements JsonSerializable, Deserializable
 {
     protected ShipModuleSymbolType $symbol;
-    protected int $capacity;
-    protected int $range;
+    protected ?int $capacity;
+    protected ?int $range;
     protected string $name;
     protected string $description;
     protected ShipRequirements $requirements;
 
     /**
      * @param ShipModuleSymbolType $symbol
-     * @param int                  $capacity
-     * @param int                  $range
+     * @param int|null             $capacity
+     * @param int|null             $range
      * @param string               $name
      * @param string               $description
      * @param ShipRequirements     $requirements
      */
     public function __construct(
         ShipModuleSymbolType $symbol,
-        int $capacity,
-        int $range,
+        ?int $capacity,
+        ?int $range,
         string $name,
         string $description,
         ShipRequirements $requirements
@@ -58,36 +58,36 @@ class ShipModule implements JsonSerializable, Deserializable
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCapacity(): int
+    public function getCapacity(): ?int
     {
         return $this->capacity;
     }
 
     /**
-     * @param  int $capacity
+     * @param int|null $capacity
      * @return ShipModule
      */
-    public function setCapacity(int $capacity): ShipModule
+    public function setCapacity(?int $capacity): ShipModule
     {
         $this->capacity = $capacity;
         return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRange(): int
+    public function getRange(): ?int
     {
         return $this->range;
     }
 
     /**
-     * @param  int $range
+     * @param int|null $range
      * @return ShipModule
      */
-    public function setRange(int $range): ShipModule
+    public function setRange(?int $range): ShipModule
     {
         $this->range = $range;
         return $this;
@@ -150,12 +150,12 @@ class ShipModule implements JsonSerializable, Deserializable
     public static function fromArray(array $data): self
     {
         return new self(
-            symbol: ShipModuleSymbolType::fromName($data('symbol')),
-            capacity: $data('capacity'),
-            range: $data('range'),
-            name: $data('name'),
-            description: $data('description'),
-            requirements: ShipRequirements::fromArray($data('requirents'))
+            symbol: ShipModuleSymbolType::fromName($data['symbol']),
+            capacity: array_key_exists('capacity', $data) ? $data['capacity'] : null,
+            range: array_key_exists('range', $data) ? $data['range'] : null,
+            name: $data['name'],
+            description: $data['description'],
+            requirements: ShipRequirements::fromArray($data['requirements'])
         );
     }
 

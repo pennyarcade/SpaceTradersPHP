@@ -82,7 +82,16 @@ class ShipCargo implements JsonSerializable, Deserializable
 
     public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        $inventory = [];
+        foreach ($data['inventory'] as $item) {
+            $inventory[] = ShipCargoItem::fromArray($item);
+        }
+
+        return new self(
+            capacity: $data['capacity'],
+            units: $data['units'],
+            inventory: $inventory
+        );
     }
 
     public function jsonSerialize(): mixed

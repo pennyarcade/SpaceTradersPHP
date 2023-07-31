@@ -151,7 +151,7 @@ class ShipEngine implements JsonSerializable, Deserializable
     {
         return new self(
             symbol: ShipEngineSymbolType::fromName($data['symbol']),
-            name: $data['string'],
+            name: $data['name'],
             description: $data['description'],
             condition: $data['condition'],
             speed: $data['speed'],

@@ -6,7 +6,7 @@ namespace App\SpaceTraders\Enum;
 
 use App\Common\Trait\Enum;
 
-enum ShipFrame: string
+enum ShipFrameType: string
 {
     use Enum;
 

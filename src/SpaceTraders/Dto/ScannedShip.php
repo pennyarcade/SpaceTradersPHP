@@ -4,7 +4,7 @@ namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
 use App\SpaceTraders\Enum\ShipEngineSymbolType;
-use App\SpaceTraders\Enum\ShipFrame;
+use App\SpaceTraders\Enum\ShipFrameType;
 use App\SpaceTraders\Enum\ShipMountSymbolType;
 use App\SpaceTraders\Enum\ShipReactorSymbolType;
 use JsonSerializable;
@@ -14,7 +14,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     protected string $symbol;
     protected ShipRegistration $registration;
     protected ShipNav $nav;
-    protected ?ShipFrame $frameSymbol;
+    protected ?ShipFrameType $frameSymbol;
     protected ?ShipReactorSymbolType $reactorSymbol;
     protected ShipEngineSymbolType $engineSymbol;
     /**
@@ -26,7 +26,7 @@ class ScannedShip implements JsonSerializable, Deserializable
      * @param string                     $symbol
      * @param ShipRegistration           $registration
      * @param ShipNav                    $nav
-     * @param ShipFrame|null             $frameSymbol
+     * @param ShipFrameType|null             $frameSymbol
      * @param ShipReactorSymbolType|null $reactorSymbol
      * @param ShipEngineSymbolType       $engineSymbol
      * @param ShipMountSymbolType[]|null $mounts
@@ -36,7 +36,7 @@ class ScannedShip implements JsonSerializable, Deserializable
         ShipRegistration $registration,
         ShipNav $nav,
         ShipEngineSymbolType $engineSymbol,
-        ?ShipFrame $frameSymbol = null,
+        ?ShipFrameType $frameSymbol = null,
         ?ShipReactorSymbolType $reactorSymbol = null,
         ?array $mounts = null
     ) {
@@ -104,7 +104,7 @@ class ScannedShip implements JsonSerializable, Deserializable
     }
 
     /**
-     * @return ShipFrame|null
+     * @return ShipFrameType|null
      */
     public function getFrameSymbol(): ?ShipFrame
     {

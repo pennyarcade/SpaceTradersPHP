@@ -3,7 +3,6 @@
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
-use App\SpaceTraders\Enum\ShipFrame;
 use JsonSerializable;
 
 class Ship implements JsonSerializable, Deserializable
@@ -280,7 +279,7 @@ class Ship implements JsonSerializable, Deserializable
             registration: ShipRegistration::fromArray($data['registration']),
             nav: ShipNav::fromArray($data['nav']),
             crew: ShipCrew::fromArray($data['crew']),
-            frame: ShipFrame::fromName($data['frame']),
+            frame: ShipFrame::fromArray($data['frame']),
             reactor: ShipReactor::fromArray($data['reactor']),
             engine: ShipEngine::fromArray($data['engine']),
             modules: $modules,

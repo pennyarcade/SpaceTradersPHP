@@ -7,16 +7,16 @@ use JsonSerializable;
 
 class ShipRequirements implements JsonSerializable, Deserializable
 {
-    protected int $power;
-    protected int $crew;
-    protected int $slots;
+    protected ?int $power;
+    protected ?int $crew;
+    protected ?int $slots;
 
     /**
-     * @param int $power
-     * @param int $crew
-     * @param int $slots
+     * @param int|null $power
+     * @param int|null $crew
+     * @param int|null $slots
      */
-    public function __construct(int $power, int $crew, int $slots)
+    public function __construct(?int $power, ?int $crew, ?int $slots)
     {
         $this->power = $power;
         $this->crew = $crew;
@@ -24,36 +24,36 @@ class ShipRequirements implements JsonSerializable, Deserializable
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPower(): int
+    public function getPower(): ?int
     {
         return $this->power;
     }
 
     /**
-     * @param  int $power
+     * @param int|null $power
      * @return ShipRequirements
      */
-    public function setPower(int $power): ShipRequirements
+    public function setPower(?int $power): ShipRequirements
     {
         $this->power = $power;
         return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCrew(): int
+    public function getCrew(): ?int
     {
         return $this->crew;
     }
 
     /**
-     * @param  int $crew
+     * @param int|null $crew
      * @return ShipRequirements
      */
-    public function setCrew(int $crew): ShipRequirements
+    public function setCrew(?int $crew): ShipRequirements
     {
         $this->crew = $crew;
         return $this;
@@ -62,7 +62,7 @@ class ShipRequirements implements JsonSerializable, Deserializable
     /**
      * @return int
      */
-    public function getSlots(): int
+    public function getSlots(): ?int
     {
         return $this->slots;
     }
@@ -71,7 +71,7 @@ class ShipRequirements implements JsonSerializable, Deserializable
      * @param  int $slots
      * @return ShipRequirements
      */
-    public function setSlots(int $slots): ShipRequirements
+    public function setSlots(?int $slots): ShipRequirements
     {
         $this->slots = $slots;
         return $this;
@@ -80,9 +80,9 @@ class ShipRequirements implements JsonSerializable, Deserializable
     public static function fromArray(array $data): self
     {
         return new self(
-            power: $data['power'],
-            crew: $data['crew'],
-            slots: $data['slots']
+            power: array_key_exists('power', $data) ? $data['power'] : null,
+            crew: array_key_exists('crew', $data) ? $data['crew'] : null,
+            slots: array_key_exists('slots', $data) ? $data['slots'] : null
         );
     }
 

@@ -100,7 +100,12 @@ class ShipCargoItem implements JsonSerializable, Deserializable
 
     public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            symbol: $data['symbol'],
+            name: $data['name'],
+            description: $data['description'],
+            units: $data['units']
+        );
     }
 
     public function jsonSerialize(): mixed

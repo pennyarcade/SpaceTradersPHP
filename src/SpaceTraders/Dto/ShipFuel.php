@@ -82,7 +82,11 @@ class ShipFuel implements JsonSerializable, Deserializable
 
     public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            current: $data['current'],
+            capacity: $data['capacity'],
+            consumed: array_key_exists('consumed', $data) ? ShipFuelConsumed::fromArray($data['consumed']) : null
+        );
     }
 
     public function jsonSerialize(): mixed

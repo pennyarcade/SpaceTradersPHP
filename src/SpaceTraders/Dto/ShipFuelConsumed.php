@@ -3,18 +3,19 @@
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
+use DateTime;
 use JsonSerializable;
 
 class ShipFuelConsumed implements JsonSerializable, Deserializable
 {
     protected int $amount;
-    protected int $timestamp;
+    protected DateTime $timestamp;
 
     /**
      * @param int $amount
-     * @param int $timestamp
+     * @param DateTime $timestamp
      */
-    public function __construct(int $amount, int $timestamp)
+    public function __construct(int $amount, DateTime $timestamp)
     {
         $this->amount = $amount;
         $this->timestamp = $timestamp;
@@ -39,18 +40,18 @@ class ShipFuelConsumed implements JsonSerializable, Deserializable
     }
 
     /**
-     * @return int
+     * @return DateTime
      */
-    public function getTimestamp(): int
+    public function getTimestamp(): DateTime
     {
         return $this->timestamp;
     }
 
     /**
-     * @param  int $timestamp
+     * @param DateTime $timestamp
      * @return ShipFuelConsumed
      */
-    public function setTimestamp(int $timestamp): ShipFuelConsumed
+    public function setTimestamp(DateTime $timestamp): ShipFuelConsumed
     {
         $this->timestamp = $timestamp;
         return $this;
@@ -58,7 +59,10 @@ class ShipFuelConsumed implements JsonSerializable, Deserializable
 
     public static function fromArray(array $data): self
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            amount: $data['amount'],
+            timestamp: new DateTime($data['timestamp'])
+        );
     }
 
     public function jsonSerialize(): mixed

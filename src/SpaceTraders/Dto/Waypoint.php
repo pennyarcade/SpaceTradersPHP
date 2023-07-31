@@ -3,6 +3,7 @@
 namespace App\SpaceTraders\Dto;
 
 use App\Common\Deserializable;
+use App\Persistence\Entity\Chart;
 use JsonSerializable;
 
 class Waypoint extends SystemWaypoint implements JsonSerializable, Deserializable
