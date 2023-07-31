@@ -6,3 +6,4 @@ Space Traders PHP Console Client
 @see https://spacetraders.io/
 
 TODO: Write sensible readme :-P
+TODO: Move all Dto to Entity; Double data object doesn't work.
